@@ -1,6 +1,11 @@
 ---
-const pageTitle = "dom";
-const description = "static astro foundation placeholder";
+import { siteConfig } from "../data/site";
+import { assetPath, canonicalUrl, homePath } from "../lib/paths";
+
+const pageTitle = siteConfig.defaultTitle;
+const description = siteConfig.defaultDescription;
+const socialImagePath = assetPath(siteConfig.defaultSocialImage);
+const pageCanonicalUrl = canonicalUrl("/");
 ---
 
 <!doctype html>
@@ -10,11 +15,18 @@ const description = "static astro foundation placeholder";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={pageCanonicalUrl} />
   </head>
   <body>
     <main>
-      <h1>{pageTitle}</h1>
+      <h1>{siteConfig.name}</h1>
       <p>publishing foundation in progress.</p>
+      <p>{description}</p>
+      <ul>
+        <li><a href={homePath}>base-aware home path</a></li>
+        <li>default social asset path: <code>{socialImagePath}</code></li>
+        <li>canonical url: <code>{pageCanonicalUrl}</code></li>
+      </ul>
     </main>
   </body>
 </html>
