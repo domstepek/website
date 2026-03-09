@@ -7,7 +7,7 @@ stopped_at: Completed 01-03-PLAN.md
 last_updated: "2026-03-09T18:56:42Z"
 last_activity: 2026-03-09 — Completed 01-03 release gate and GitHub Pages automation; Phase 1 complete
 progress:
-  total_phases: 5
+  total_phases: 6
   completed_phases: 1
   total_plans: 3
   completed_plans: 3
@@ -25,7 +25,7 @@ See: `.planning/PROJECT.md` (updated 2026-03-09)
 
 ## Current Position
 
-Phase: 2 of 5 (Domain Hubs & Supporting Work)
+Phase: 2 of 6 (Domain Hubs & Supporting Work)
 Plan: Not yet planned
 Status: Ready for planning
 Last activity: 2026-03-09 — Completed 01-03 release gate and GitHub Pages automation; Phase 1 complete
@@ -48,6 +48,7 @@ Progress: [██████████] 100%
 | 3 | 0 | - | - |
 | 4 | 0 | - | - |
 | 5 | 0 | - | - |
+| 6 | 0 | - | - |
 
 **Recent Trend:**
 - Last 5 plans: 01-01 (3 min), 01-02 (6 min), 01-03 (9 min)
@@ -75,6 +76,11 @@ Recent decisions affecting current work:
 - [Phase 01]: Validate the built `dist` artifacts rather than source templates so the release gate matches what GitHub Pages will actually publish. — This catches missing copied assets and emitted metadata regressions before deploy.
 - [Phase 01]: Derive default Pages `PUBLIC_SITE_URL` and `PUBLIC_BASE_PATH` from repository context in CI, while still allowing repository-variable overrides. — This keeps project-site deploys working by default without hard-coding the final hosted URL.
 - [Phase 01]: Treat live GitHub Pages publish and manual QA as an explicit user-setup handoff when the remote/Pages target is not trustworthy in the local repo state. — This preserves an honest phase gate without pretending hosted verification already happened.
+
+### Roadmap Evolution
+
+- Phase 6 added: Set up custom domain via is-a-dev/register
+- Phase 6 captures the custom domain registration and site configuration work needed after the main v1 content/site build is in place.
 
 ### Pending Todos
 

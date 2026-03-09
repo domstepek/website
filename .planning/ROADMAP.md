@@ -15,6 +15,7 @@ This roadmap builds the site in the order that best supports a domain-first port
 - [ ] **Phase 3: Homepage Positioning** - Build the landing page that frames Dom's work and routes visitors into the domain pages.
 - [ ] **Phase 4: Flagship Proof & Visuals** - Add deeper flagship highlights, stack details, and visuals where they materially improve understanding.
 - [ ] **Phase 5: Personal Context & Notes** - Finish the site with `how i work`, resume and `open to` framing, and the lightweight notes area.
+- [ ] **Phase 6: Set up custom domain via is-a-dev/register** - Configure a custom domain handoff and registration path for the published site.
 
 ## Phase Details
 
@@ -91,10 +92,20 @@ Plans:
 Plans:
 - [ ] TBD (run `$gsd-plan-phase 5` to break down this phase)
 
+### Phase 6: Set up custom domain via is-a-dev/register
+
+**Goal:** [To be planned]
+**Requirements:** TBD
+**Depends on:** Phase 5
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run `$gsd-plan-phase 6` to break down this phase)
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -103,3 +114,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 3. Homepage Positioning | 0/TBD | Not started | - |
 | 4. Flagship Proof & Visuals | 0/TBD | Not started | - |
 | 5. Personal Context & Notes | 0/TBD | Not started | - |
+| 6. Set up custom domain via is-a-dev/register | 0/TBD | Not started | - |
