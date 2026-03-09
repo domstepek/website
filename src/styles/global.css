@@ -169,6 +169,109 @@ a:hover {
   font-size: 0.95rem;
 }
 
+.home-page {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+}
+
+.home-page > * {
+  min-width: 0;
+}
+
+.home-page__hero,
+.home-page__section,
+.home-page__section-copy {
+  display: grid;
+  gap: 1rem;
+}
+
+.home-page__hero {
+  max-width: 44rem;
+}
+
+.home-page__hero h1 {
+  max-width: min(100%, 16ch);
+}
+
+.home-page__eyebrow {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+}
+
+.home-page__lead,
+.home-page__freshness-copy {
+  max-width: 36rem;
+  color: var(--text);
+  font-size: clamp(1.08rem, 1.02rem + 0.35vw, 1.3rem);
+  line-height: 1.65;
+}
+
+.home-page__domain-intro {
+  max-width: 36rem;
+}
+
+.home-page__domains {
+  gap: 1.25rem;
+}
+
+.home-page__domain-list,
+.home-page__contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.home-page__domain-list {
+  display: grid;
+  gap: 0;
+  max-width: min(100%, 56rem);
+  border-top: 1px solid var(--border);
+}
+
+.home-page__domain-item {
+  display: grid;
+  gap: 0.45rem 1rem;
+  align-items: start;
+  padding-block: 0.95rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.home-page__domain-link {
+  display: inline-block;
+  font-size: clamp(1.08rem, 1.02rem + 0.35vw, 1.22rem);
+}
+
+.home-page__domain-summary {
+  max-width: 34rem;
+}
+
+.home-page__meta {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.home-page__contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+}
+
+.home-page__contact-list a,
+.home-page__domain-link {
+  display: inline-block;
+}
+
+.home-page__contact-list a:focus-visible,
+.home-page__domain-link:focus-visible {
+  outline-offset: 0.22rem;
+}
+
+.home-page__freshness-note {
+  color: var(--muted);
+}
+
 .domain-page {
   display: grid;
   gap: clamp(1.75rem, 4vw, 2.75rem);
@@ -276,6 +379,19 @@ a:hover {
   outline-offset: 0.22rem;
 }
 
+@media (min-width: 42rem) {
+  .home-page__domain-item {
+    grid-template-columns: minmax(9rem, 12rem) minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 56rem) {
+  .home-page__meta {
+    grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+    column-gap: 2rem;
+  }
+}
+
 @media (max-width: 40rem) {
   .shell {
     width: min(calc(100% - 1.5rem), var(--shell-width));
@@ -296,6 +412,14 @@ a:hover {
 
   .domain-page__title {
     max-width: 100%;
+  }
+
+  .home-page {
+    gap: 1.75rem;
+  }
+
+  .home-page__domain-item {
+    padding-block: 0.85rem;
   }
 
   .supporting-work__item {
