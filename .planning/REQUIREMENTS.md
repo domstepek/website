@@ -73,12 +73,33 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
+| QUAL-01 | Phase 1 - Publishing Foundation | Pending |
+| QUAL-02 | Phase 1 - Publishing Foundation | Pending |
+| QUAL-03 | Phase 1 - Publishing Foundation | Pending |
+| QUAL-04 | Phase 1 - Publishing Foundation | Pending |
+| DOMN-01 | Phase 2 - Domain Hubs & Supporting Work | Pending |
+| DOMN-02 | Phase 2 - Domain Hubs & Supporting Work | Pending |
+| DOMN-03 | Phase 2 - Domain Hubs & Supporting Work | Pending |
+| DOMN-04 | Phase 2 - Domain Hubs & Supporting Work | Pending |
+| HOME-01 | Phase 3 - Homepage Positioning | Pending |
+| HOME-02 | Phase 3 - Homepage Positioning | Pending |
+| HOME-03 | Phase 3 - Homepage Positioning | Pending |
+| HOME-04 | Phase 3 - Homepage Positioning | Pending |
+| HIGH-01 | Phase 4 - Flagship Proof & Visuals | Pending |
+| HIGH-02 | Phase 4 - Flagship Proof & Visuals | Pending |
+| HIGH-03 | Phase 4 - Flagship Proof & Visuals | Pending |
+| HIGH-04 | Phase 4 - Flagship Proof & Visuals | Pending |
+| PROF-01 | Phase 5 - Personal Context & Notes | Pending |
+| PROF-02 | Phase 5 - Personal Context & Notes | Pending |
+| PROF-03 | Phase 5 - Personal Context & Notes | Pending |
+| NOTE-01 | Phase 5 - Personal Context & Notes | Pending |
+| NOTE-02 | Phase 5 - Personal Context & Notes | Pending |
 
 **Coverage:**
 - v1 requirements: 21 total
-- Mapped to phases: 0
-- Unmapped: 21
+- Mapped to phases: 21
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-09*
-*Last updated: 2026-03-09 after initial definition*
+*Last updated: 2026-03-09 after roadmap creation*
