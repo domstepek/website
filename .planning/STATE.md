@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-03-09T20:42:53Z"
-last_activity: 2026-03-09 — Completed 02-02 with sharper domain boundaries, curated supporting-work evidence, and domain-page readability polish
+stopped_at: Completed 02-03-PLAN.md
+last_updated: "2026-03-09T20:51:40Z"
+last_activity: 2026-03-09 — Completed 02-03 with dist-first domain validation, aggregate site checks, and GitHub Pages deploy gating
 progress:
   total_phases: 6
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 6
-  completed_plans: 5
-  percent: 83
+  completed_plans: 6
+  percent: 100
 ---
 
 # Project State
@@ -21,38 +21,38 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-03-09)
 
 **Core value:** Someone should be able to land on the site and quickly understand what kinds of complex systems Dom builds, then explore the domains that matter to them without getting buried in noise.
-**Current focus:** Phase 2 - Domain Hubs & Supporting Work
+**Current focus:** Phase 3 - Homepage Positioning
 
 ## Current Position
 
-Phase: 2 of 6 (Domain Hubs & Supporting Work)
-Plan: 3 of 3 (02-03 next)
-Status: 02-02 complete; ready for 02-03
-Last activity: 2026-03-09 — Completed 02-02 with sharper domain boundaries, curated supporting-work evidence, and domain-page readability polish
+Phase: 3 of 6 (Homepage Positioning)
+Plan: TBD (Phase 3 not yet planned)
+Status: Phase 2 complete; ready to plan Phase 3
+Last activity: 2026-03-09 — Completed 02-03 with dist-first domain validation, aggregate site checks, and GitHub Pages deploy gating
 
-Progress: [████████░░] 83%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
+- Total plans completed: 6
 - Average duration: 6 min
-- Total execution time: 0.5 hours
+- Total execution time: 0.6 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1 | 3 | 18 min | 6 min |
-| 2 | 2 | 12 min | 6 min |
+| 2 | 3 | 18 min | 6 min |
 | 3 | 0 | - | - |
 | 4 | 0 | - | - |
 | 5 | 0 | - | - |
 | 6 | 0 | - | - |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (3 min), 01-02 (6 min), 01-03 (9 min), 02-01 (5 min), 02-02 (7 min)
-- Trend: Phase 2 now has clear domain boundaries, curated supporting evidence, and shared layout hooks, so `02-03` can validate the built artifacts directly in `dist`
+- Last 5 plans: 01-02 (6 min), 01-03 (9 min), 02-01 (5 min), 02-02 (7 min), 02-03 (6 min)
+- Trend: Phase 2 now has dist-first validation and a shared site release gate, so Phase 3 can build on a fully validated domain architecture
 
 *Updated after each plan completion*
 
@@ -86,6 +86,9 @@ Recent decisions affecting current work:
 - [Phase 02]: Make each scope line explicitly contrast neighboring domains so visitors can tell the hubs apart from the opening section alone.
 - [Phase 02]: Keep supporting-work proof links inline but on their own short line so visitors scan the work before deciding to click out.
 - [Phase 02]: Handle cross-domain overlap with brief linked notes inside supporting items instead of duplicating full entries.
+- [Phase 02]: Validate the five domain hubs from emitted `dist` HTML instead of source templates so the release gate matches what GitHub Pages will actually publish.
+- [Phase 02]: Derive the expected back-home href from each domain page's canonical URL so structural validation stays base-path aware without depending on source helpers.
+- [Phase 02]: Run Phase 1 and Phase 2 validators through one `validate:site` command and reuse it in CI so future phases extend a single site-level gate.
 
 ### Roadmap Evolution
 
@@ -98,11 +101,11 @@ None right now.
 
 ### Blockers/Concerns
 
-- `02-03` should validate the built domain artifacts directly in `dist` and carry these structural checks into CI.
+- Phase 3 is ready to start, but it does not have a plan breakdown yet.
 - Flagship highlights and deeper role/decision proof remain intentionally deferred to Phase 4.
 
 ## Session Continuity
 
-Last session: 2026-03-09T20:42:53Z
-Stopped at: Completed 02-02-PLAN.md
-Resume file: .planning/phases/02-domain-hubs-supporting-work/02-03-PLAN.md
+Last session: 2026-03-09T20:51:40Z
+Stopped at: Completed 02-03-PLAN.md
+Resume file: None

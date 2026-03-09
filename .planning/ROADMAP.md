@@ -11,7 +11,7 @@ This roadmap builds the site in the order that best supports a domain-first port
 - Decimal phases can be inserted later if urgent work needs to land between existing phases.
 
 - [x] **Phase 1: Publishing Foundation** - Establish the static site, deploy path, typography baseline, metadata, and accessibility baseline.
-- [ ] **Phase 2: Domain Hubs & Supporting Work** - Create the five domain pages and lock the domain-first information architecture.
+- [x] **Phase 2: Domain Hubs & Supporting Work** - Create the five domain pages and lock the domain-first information architecture.
 - [ ] **Phase 3: Homepage Positioning** - Build the landing page that frames Dom's work and routes visitors into the domain pages.
 - [ ] **Phase 4: Flagship Proof & Visuals** - Add deeper flagship highlights, stack details, and visuals where they materially improve understanding.
 - [ ] **Phase 5: Personal Context & Notes** - Finish the site with `how i work`, resume and `open to` framing, and the lightweight notes area.
@@ -44,12 +44,12 @@ Plans:
   2. Each domain page opens with a short thesis that makes the boundary of that domain clear.
   3. Each domain page includes a curated supporting-work list for non-flagship examples, with enough context to scan quickly.
   4. Each domain page provides obvious navigation back home and outward to relevant proof artifacts.
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans executed
 
 Plans:
 - [x] `02-01` Bootstrap typed domain data and shared `/domains/[slug]/` routes
 - [x] `02-02` Refine thesis clarity, supporting-work curation, and domain-page polish
-- [ ] `02-03` Add dist-first domain validation and CI release gates
+- [x] `02-03` Add dist-first domain validation and CI release gates
 
 ### Phase 3: Homepage Positioning
 **Goal:** Make the first screen explain Dom's scope, link into the domains, surface contact, and signal freshness.
@@ -112,7 +112,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Publishing Foundation | 3/3 | Complete | 2026-03-09 |
-| 2. Domain Hubs & Supporting Work | 2/3 | In Progress | - |
+| 2. Domain Hubs & Supporting Work | 3/3 | Complete | 2026-03-09 |
 | 3. Homepage Positioning | 0/TBD | Not started | - |
 | 4. Flagship Proof & Visuals | 0/TBD | Not started | - |
 | 5. Personal Context & Notes | 0/TBD | Not started | - |

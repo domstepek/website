@@ -104,6 +104,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 - Live GitHub Pages deployment and manual QA were completed for `https://domstepek.github.io/website/`.
 - Future browser-accessible site smoke checks should prefer `/agent-browser --native` before asking for human-only validation.
 
+**Phase 2 sign-off:**
+- `pnpm validate:site` now runs both Phase 1 and Phase 2 structural release gates after build.
+- The Phase 2 validator checks the emitted domain artifacts for canonical metadata, base-aware back-home wiring, supporting-work markers, rendered supporting entries, and outward proof-link presence.
+
 ---
 *Requirements defined: 2026-03-09*
-*Last updated: 2026-03-09 after Phase 02 Plan 02 completion*
+*Last updated: 2026-03-09 after Phase 02 Plan 03 completion*
