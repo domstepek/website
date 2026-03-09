@@ -4,19 +4,56 @@ const aiMl: DomainEntry = {
   slug: "ai-ml",
   order: 3,
   title: "ai / ml",
-  summary: "seeded ai / ml domain content for the shared Phase 2 route.",
+  summary:
+    "applied model work, retrieval flows, and agent-shaped tooling that earn their keep in real workflows.",
   seoDescription:
-    "A seeded AI and ML domain page for agent flows, model-assisted tooling, and applied automation.",
-  thesis: "i like using models when they remove drudge work instead of adding theater.",
-  scope: "this domain is for applied model workflows, agents, and ML-assisted product features.",
+    "Domain page for applied AI and ML tooling, retrieval flows, and agent-based systems Dom builds.",
+  thesis:
+    "i use ai / ml where it removes drudge work or sharpens decisions, not where it just adds theater.",
+  scope:
+    "if the core value comes from model behavior or orchestration around model behavior, it belongs here.",
   belongsHere: [
-    "tools where models help classify, summarize, or route work",
-    "agent-style flows that connect people, systems, and context",
+    "retrieval, classification, and generation flows tied to concrete product or ops tasks",
+    "agent-style actions where the interesting part is orchestration across tools and context",
+    "ml-assisted features that still leave room for override, review, and practical debugging",
   ],
   supportingWork: [
     {
-      title: "seeded ai / ml example",
-      context: "placeholder supporting work so the shared route can render real structure.",
+      title: "collection curator api",
+      context:
+        "an Apollo, Express, and FastAPI platform exploring a next-gen product analytics API with Bedrock, LangChain, and MCP in the stack.",
+      proofLinks: [
+        {
+          label: "repo",
+          href: "https://github.com/tpr-datalabs/collection-curator-api",
+        },
+      ],
+    },
+    {
+      title: "mcp demo",
+      context:
+        "a focused demo for user-driven and agent-driven actions through MCP, useful for proving the interaction model with something tangible.",
+      proofLinks: [
+        {
+          label: "demo",
+          href: "https://cdn-dev.tapestrydev.com/mcp-demo",
+        },
+        {
+          label: "repo",
+          href: "https://github.com/tpr-datalabs/mcp-demo",
+        },
+      ],
+    },
+    {
+      title: "bedrock utilities in datalabs api",
+      context:
+        "Bedrock-backed converse, knowledge-base, and retrieve-and-generate utilities wired into a larger production API surface.",
+      proofLinks: [
+        {
+          label: "repo",
+          href: "https://github.com/tpr-datalabs/datalabs-api",
+        },
+      ],
     },
   ],
   relatedDomains: ["analytics", "developer-experience"],
