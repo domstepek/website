@@ -46,8 +46,8 @@ jobs:
       - name: Build production site
         run: pnpm astro build
 
-      - name: Validate Phase 1 artifacts
-        run: pnpm validate:phase1
+      - name: Validate site artifacts
+        run: pnpm validate:site
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
