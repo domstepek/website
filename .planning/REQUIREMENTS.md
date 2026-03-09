@@ -100,6 +100,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 - Mapped to phases: 21
 - Unmapped: 0
 
+**Phase 1 handoff:**
+- Live GitHub Pages deployment confirmation and the remaining manual QA pass are tracked in `.planning/phases/01-publishing-foundation/01-VALIDATION.md` and `.planning/phases/01-publishing-foundation/01-USER-SETUP.md`.
+
 ---
 *Requirements defined: 2026-03-09*
-*Last updated: 2026-03-09 after Phase 01 Plan 02 completion*
+*Last updated: 2026-03-09 after Phase 01 completion*
