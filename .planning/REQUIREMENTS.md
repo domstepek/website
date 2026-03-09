@@ -7,10 +7,10 @@
 
 ### Home
 
-- [ ] **HOME-01**: Visitor can understand from the first screen that Dom builds analytics platforms, infrastructure, AI/ML tooling, product systems, and developer experience tooling
-- [ ] **HOME-02**: Visitor can navigate from the homepage to the domain pages for analytics platforms, infrastructure / devops, AI / ML tooling, product engineering, and developer experience
-- [ ] **HOME-03**: Visitor can open Dom's GitHub, LinkedIn, and email links from the homepage
-- [ ] **HOME-04**: Visitor can see a freshness signal on the homepage such as `currently` or `last updated`
+- [x] **HOME-01**: Visitor can understand from the first screen that Dom builds analytics platforms, infrastructure, AI/ML tooling, product systems, and developer experience tooling
+- [x] **HOME-02**: Visitor can navigate from the homepage to the domain pages for analytics platforms, infrastructure / devops, AI / ML tooling, product engineering, and developer experience
+- [x] **HOME-03**: Visitor can open Dom's GitHub, LinkedIn, and email links from the homepage
+- [x] **HOME-04**: Visitor can see a freshness signal on the homepage such as `currently` or `last updated`
 
 ### Domains
 
@@ -81,10 +81,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DOMN-02 | Phase 2 - Domain Hubs & Supporting Work | Complete |
 | DOMN-03 | Phase 2 - Domain Hubs & Supporting Work | Complete |
 | DOMN-04 | Phase 2 - Domain Hubs & Supporting Work | Complete |
-| HOME-01 | Phase 3 - Homepage Positioning | Pending |
-| HOME-02 | Phase 3 - Homepage Positioning | Pending |
-| HOME-03 | Phase 3 - Homepage Positioning | Pending |
-| HOME-04 | Phase 3 - Homepage Positioning | Pending |
+| HOME-01 | Phase 3 - Homepage Positioning | Complete |
+| HOME-02 | Phase 3 - Homepage Positioning | Complete |
+| HOME-03 | Phase 3 - Homepage Positioning | Complete |
+| HOME-04 | Phase 3 - Homepage Positioning | Complete |
 | HIGH-01 | Phase 4 - Flagship Proof & Visuals | Pending |
 | HIGH-02 | Phase 4 - Flagship Proof & Visuals | Pending |
 | HIGH-03 | Phase 4 - Flagship Proof & Visuals | Pending |
@@ -110,4 +110,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-09*
-*Last updated: 2026-03-09 after Phase 02 Plan 03 completion*
+*Last updated: 2026-03-09 after Phase 03 Plan 01 completion*

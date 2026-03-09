@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Phase 2 verification complete
-last_updated: "2026-03-09T20:56:33Z"
-last_activity: 2026-03-09 — Phase 2 verified complete with domain hubs, supporting-work curation, and dist-first release gates; ready to plan Phase 3
+status: ready_to_execute
+stopped_at: Completed 03-01-PLAN.md
+last_updated: "2026-03-09T23:51:01Z"
+last_activity: 2026-03-09 — 03-01 shipped the real homepage front door with shared data, contact links, and domain navigation; 03-02 is next
 progress:
   total_phases: 6
   completed_phases: 2
-  total_plans: 6
-  completed_plans: 6
-  percent: 100
+  total_plans: 9
+  completed_plans: 7
+  percent: 78
 ---
 
 # Project State
@@ -26,18 +26,18 @@ See: `.planning/PROJECT.md` (updated 2026-03-09)
 ## Current Position
 
 Phase: 3 of 6 (Homepage Positioning)
-Plan: TBD (Phase 3 not yet planned)
-Status: Phase 2 complete; ready to plan Phase 3
-Last activity: 2026-03-09 — Phase 2 verified complete with domain hubs, supporting-work curation, and dist-first release gates; ready to plan Phase 3
+Plan: 1 of 3 complete (`03-02` next)
+Status: Phase 3 in progress; ready to execute `03-02`
+Last activity: 2026-03-09 — 03-01 shipped the real homepage front door with shared data, contact links, and domain navigation; 03-02 is next
 
-Progress: [██████████] 100%
+Progress: [████████░░] 78%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
+- Total plans completed: 7
 - Average duration: 6 min
-- Total execution time: 0.6 hours
+- Total execution time: 0.7 hours
 
 **By Phase:**
 
@@ -45,14 +45,14 @@ Progress: [██████████] 100%
 |-------|-------|-------|----------|
 | 1 | 3 | 18 min | 6 min |
 | 2 | 3 | 18 min | 6 min |
-| 3 | 0 | - | - |
+| 3 | 1 | 5 min | 5 min |
 | 4 | 0 | - | - |
 | 5 | 0 | - | - |
 | 6 | 0 | - | - |
 
 **Recent Trend:**
-- Last 5 plans: 01-02 (6 min), 01-03 (9 min), 02-01 (5 min), 02-02 (7 min), 02-03 (6 min)
-- Trend: Phase 2 now has dist-first validation and a shared site release gate, so Phase 3 can build on a fully validated domain architecture
+- Last 5 plans: 01-03 (9 min), 02-01 (5 min), 02-02 (7 min), 02-03 (6 min), 03-01 (5 min)
+- Trend: The homepage front door is now live, leaving copy/layout refinement and dist-first homepage validation to finish Phase 3.
 
 *Updated after each plan completion*
 
@@ -89,6 +89,9 @@ Recent decisions affecting current work:
 - [Phase 02]: Validate the five domain hubs from emitted `dist` HTML instead of source templates so the release gate matches what GitHub Pages will actually publish.
 - [Phase 02]: Derive the expected back-home href from each domain page's canonical URL so structural validation stays base-path aware without depending on source helpers.
 - [Phase 02]: Run Phase 1 and Phase 2 validators through one `validate:site` command and reuse it in CI so future phases extend a single site-level gate.
+- [Phase 03]: Keep homepage-specific copy, contact links, freshness, and SEO fields in `src/data/home.ts` so the landing route stays thin and later copy work has one source of truth.
+- [Phase 03]: Render homepage navigation from the shared `domains` registry and `domainPath(slug)` helpers instead of inventing a second homepage-only link list. — This preserves the domain-first architecture and keeps internal links GitHub Pages-safe.
+- [Phase 03]: Keep `src/pages/index.astro` as a thin route that passes metadata into `BaseLayout` and renders `HomePage`. — This preserves the shared layout contract from Phase 1 and keeps page-shell logic centralized.
 
 ### Roadmap Evolution
 
@@ -101,11 +104,11 @@ None right now.
 
 ### Blockers/Concerns
 
-- Phase 3 is ready to start, but it does not have a plan breakdown yet.
+- No Phase 3 `CONTEXT.md` was captured, so `03-02` and `03-03` should keep following `03-RESEARCH.md` plus existing project constraints unless new guidance is added first.
 - Flagship highlights and deeper role/decision proof remain intentionally deferred to Phase 4.
 
 ## Session Continuity
 
-Last session: 2026-03-09T20:56:33Z
-Stopped at: Phase 2 verification complete
+Last session: 2026-03-09T23:51:01Z
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None
