@@ -1,0 +1,79 @@
+---
+import { getDomainBySlug } from "../../data/domains";
+import type { DomainEntry } from "../../data/domains/types";
+import { domainPath, homePath } from "../../lib/paths";
+
+interface Props {
+  domain: DomainEntry;
+}
+
+const { domain } = Astro.props;
+const { title, thesis, scope, belongsHere, supportingWork, relatedDomains = [] } = domain;
+
+const relatedEntries = relatedDomains
+  .map((slug) => getDomainBySlug(slug))
+  .filter((entry): entry is DomainEntry => Boolean(entry));
+
+const supportingItems = supportingWork.map((item) => ({
+  ...item,
+  proofLinks: item.proofLinks ?? [],
+}));
+---
+
+<article data-domain-page>
+  <p>
+    <a data-back-home href={homePath}>back home</a>
+  </p>
+
+  <header>
+    <h1>{title}</h1>
+    <p data-domain-thesis>{thesis}</p>
+  </header>
+
+  <section aria-labelledby="belongs-here-heading">
+    <h2 id="belongs-here-heading">what belongs here</h2>
+    <ul>
+      {belongsHere.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+    <p>
+      <strong>scope:</strong> {scope}
+    </p>
+  </section>
+
+  <section aria-labelledby="supporting-work-heading" data-supporting-work>
+    <h2 id="supporting-work-heading">supporting work</h2>
+    {supportingItems.map((item) => (
+      <article data-supporting-item>
+        <h3>{item.title}</h3>
+        <p>
+          {item.context}
+          {item.proofLinks.length ? " Proof: " : ""}
+          {item.proofLinks.map((link, index) => (
+            <>
+              <a data-proof-link href={link.href}>
+                {link.label}
+              </a>
+              {index < item.proofLinks.length - 1 ? ", " : ""}
+            </>
+          ))}
+        </p>
+      </article>
+    ))}
+  </section>
+
+  {relatedEntries.length > 0 && (
+    <section aria-labelledby="related-domains-heading">
+      <h2 id="related-domains-heading">related domains</h2>
+      <p>
+        {relatedEntries.map((entry, index) => (
+          <>
+            <a href={domainPath(entry.slug)}>{entry.title}</a>
+            {index < relatedEntries.length - 1 ? ", " : ""}
+          </>
+        ))}
+      </p>
+    </section>
+  )}
+</article>
