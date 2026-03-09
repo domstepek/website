@@ -14,6 +14,8 @@ export interface SupportingWorkItem {
   title: string;
   context: string;
   proofLinks?: ProofLink[];
+  overlapNote?: string;
+  relatedDomains?: DomainSlug[];
 }
 
 export interface DomainEntry {

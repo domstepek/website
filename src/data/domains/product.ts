@@ -21,18 +21,20 @@ const product: DomainEntry = {
     {
       title: "sample tracking",
       context:
-        "a workflow-heavy platform for managing sample shipments, live tracking status, KPI views, exports, and report subscriptions.",
+        "the operational app for sample shipments, status tracking, exports, and subscription-style reporting.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/sample_tracking",
         },
       ],
+      overlapNote: "the reporting surface also brushes",
+      relatedDomains: ["analytics"],
     },
     {
       title: "pricing app",
       context:
-        "a dedicated pricing workflow application with its own frontend and backend services instead of another spreadsheet-shaped process.",
+        "a dedicated pricing workflow with its own frontend and backend so quote logic stopped living in ad hoc spreadsheets.",
       proofLinks: [
         {
           label: "repo",
@@ -43,18 +45,20 @@ const product: DomainEntry = {
     {
       title: "supply forecast",
       context:
-        "supply-chain work centered on forecasting and planning flows where the product problem was operational coordination, not generic CRUD.",
+        "forecasting and planning tooling where the hard part was coordinating operational decisions across teams.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/supply-chain",
         },
       ],
+      overlapNote: "the model and reporting side of that work sits close to",
+      relatedDomains: ["analytics"],
     },
     {
       title: "cms",
       context:
-        "a multi-tenant Payload-based CMS aimed at shared content and admin workflows instead of a single-tenant marketing site.",
+        "a multi-tenant Payload CMS for shared content and admin workflows rather than a one-off marketing site.",
       proofLinks: [
         {
           label: "repo",

@@ -17,6 +17,9 @@ const relatedEntries = relatedDomains
 const supportingItems = supportingWork.map((item) => ({
   ...item,
   proofLinks: item.proofLinks ?? [],
+  relatedEntries: (item.relatedDomains ?? [])
+    .map((slug) => getDomainBySlug(slug))
+    .filter((entry): entry is DomainEntry => Boolean(entry)),
 }));
 ---
 
@@ -47,32 +50,49 @@ const supportingItems = supportingWork.map((item) => ({
     {supportingItems.map((item) => (
       <article data-supporting-item>
         <h3>{item.title}</h3>
-        <p>
-          {item.context}
-          {item.proofLinks.length ? " Proof: " : ""}
-          {item.proofLinks.map((link, index) => (
-            <>
-              <a data-proof-link href={link.href}>
-                {link.label}
-              </a>
-              {index < item.proofLinks.length - 1 ? ", " : ""}
-            </>
-          ))}
-        </p>
+        <p>{item.context}</p>
+        {item.proofLinks.length > 0 && (
+          <p>
+            <strong>proof:</strong>{" "}
+            {item.proofLinks.map((link, index) => (
+              <>
+                <a data-proof-link href={link.href}>
+                  {link.label}
+                </a>
+                {index < item.proofLinks.length - 1 ? ", " : ""}
+              </>
+            ))}
+          </p>
+        )}
+        {(item.overlapNote || item.relatedEntries.length > 0) && (
+          <p>
+            <strong>overlap:</strong>{" "}
+            {item.overlapNote ? `${item.overlapNote} ` : "also touches "}
+            {item.relatedEntries.map((entry, index) => (
+              <>
+                <a href={domainPath(entry.slug)}>{entry.title}</a>
+                {index < item.relatedEntries.length - 1 ? ", " : ""}
+              </>
+            ))}
+            {item.relatedEntries.length > 0 ? "." : ""}
+          </p>
+        )}
       </article>
     ))}
   </section>
 
   {relatedEntries.length > 0 && (
     <section aria-labelledby="related-domains-heading">
-      <h2 id="related-domains-heading">related domains</h2>
+      <h2 id="related-domains-heading">nearby domains</h2>
       <p>
+        when a project crosses boundaries, it usually lands closest to{" "}
         {relatedEntries.map((entry, index) => (
           <>
             <a href={domainPath(entry.slug)}>{entry.title}</a>
             {index < relatedEntries.length - 1 ? ", " : ""}
           </>
         ))}
+        .
       </p>
     </section>
   )}

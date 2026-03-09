@@ -21,35 +21,41 @@ const analytics: DomainEntry = {
     {
       title: "web portal",
       context:
-        "the main analytics web portal for exploring and acting on data-heavy product workflows in one place.",
+        "the main operator-facing reporting portal for drilling into product data, filters, and follow-up actions in one place.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/web-portal",
         },
       ],
+      overlapNote: "the workflow design also touches",
+      relatedDomains: ["product"],
     },
     {
       title: "umami",
       context:
-        "a self-hosted analytics deployment in AWS so measurement stayed inside our own stack instead of disappearing into a black box SaaS.",
+        "a self-hosted analytics deployment in aws so baseline measurement stayed inside our own stack and easy to inspect.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/umami",
         },
       ],
+      overlapNote: "the hosting path leans on",
+      relatedDomains: ["infrastructure"],
     },
     {
       title: "superset on stargazer",
       context:
-        "a Helm and ArgoCD path for running Apache Superset on the shared EKS platform, with room for dashboards, caching, and worker-based jobs.",
+        "the path for running Apache Superset on the shared EKS platform so analysts could publish dashboards without bespoke platform work each time.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/stargazer-applications",
         },
       ],
+      overlapNote: "the cluster and deploy rail live nearby in",
+      relatedDomains: ["infrastructure"],
     },
   ],
   relatedDomains: ["product", "ai-ml"],

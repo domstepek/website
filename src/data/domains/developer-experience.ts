@@ -21,46 +21,54 @@ const developerExperience: DomainEntry = {
     {
       title: "global design system",
       context:
-        "a shared component library and Storybook workflow for keeping product surfaces more consistent without copy-pasting UI primitives.",
+        "the shared component library and Storybook setup that gave multiple product surfaces one reusable ui baseline.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/global-design-system",
         },
       ],
+      overlapNote: "the components show up across",
+      relatedDomains: ["product"],
     },
     {
       title: "web portal qa bdd",
       context:
-        "a WebdriverIO and Cucumber automation suite covering portal workflows and API paths that were too important to leave to manual regression testing.",
+        "a WebdriverIO and Cucumber suite for high-risk portal flows and api checks that were too expensive to regression test by hand.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/web-portal-qa-bdd",
         },
       ],
+      overlapNote: "the tested user journeys live mainly in",
+      relatedDomains: ["analytics", "product"],
     },
     {
       title: "product team cli",
       context:
-        "an internal CLI for environment setup, config edits, and feature toggles so recurring product-team tasks became guided and scriptable.",
+        "an internal cli for environment setup, config edits, and feature toggles so recurring team tasks became scripted instead of tribal knowledge.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/product-team-cli",
         },
       ],
+      overlapNote: "the environment and release work connects to",
+      relatedDomains: ["infrastructure"],
     },
     {
       title: "product migration scripts",
       context:
-        "migration tooling for moving analytics product data and configuration without turning every rollout into a manual cleanup project.",
+        "migration tooling for moving analytics product data and config without turning rollouts into manual cleanup days.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/product-migration-scripts",
         },
       ],
+      overlapNote: "the destination data lives in nearby",
+      relatedDomains: ["analytics"],
     },
   ],
   relatedDomains: ["infrastructure", "product"],

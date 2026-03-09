@@ -21,18 +21,20 @@ const aiMl: DomainEntry = {
     {
       title: "collection curator api",
       context:
-        "an Apollo, Express, and FastAPI platform exploring a next-gen product analytics API with Bedrock, LangChain, and MCP in the stack.",
+        "an api platform for exploring analytics curation with Bedrock, LangChain, and MCP-backed assistant flows.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/collection-curator-api",
         },
       ],
+      overlapNote: "the product and reporting use cases sit nearby in",
+      relatedDomains: ["analytics", "product"],
     },
     {
       title: "mcp demo",
       context:
-        "a focused demo for user-driven and agent-driven actions through MCP, useful for proving the interaction model with something tangible.",
+        "a small demo that proved MCP-style user and agent actions with something concrete instead of a slide deck.",
       proofLinks: [
         {
           label: "demo",
@@ -47,13 +49,15 @@ const aiMl: DomainEntry = {
     {
       title: "bedrock utilities in datalabs api",
       context:
-        "Bedrock-backed converse, knowledge-base, and retrieve-and-generate utilities wired into a larger production API surface.",
+        "Bedrock-backed retrieve, converse, and knowledge-base helpers wired into a larger production API surface.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/datalabs-api",
         },
       ],
+      overlapNote: "the consuming data workflows land nearby in",
+      relatedDomains: ["analytics"],
     },
   ],
   relatedDomains: ["analytics", "developer-experience"],

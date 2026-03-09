@@ -21,29 +21,33 @@ const infrastructure: DomainEntry = {
     {
       title: "cdk-eks",
       context:
-        "the EKS foundation repo covering cluster creation, addons, Karpenter, external secrets, ingress, and ArgoCD.",
+        "the aws cdk foundation repo for standing up EKS, core addons, autoscaling, ingress, and secret plumbing.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/cdk-eks",
         },
       ],
+      overlapNote: "making environments repeatable also helps",
+      relatedDomains: ["developer-experience"],
     },
     {
       title: "stargazer applications",
       context:
-        "the GitOps repo for shipping Kubernetes applications through ArgoCD with environment-specific Helm values instead of ad hoc deploys.",
+        "the GitOps repo that pushed services through ArgoCD and Helm values instead of one-off deploy steps.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/stargazer-applications",
         },
       ],
+      overlapNote: "it carries analytics apps too, but the main value is the deploy rail that supports",
+      relatedDomains: ["analytics"],
     },
     {
       title: "private cdn",
       context:
-        "an internal CDN and proxy service that combined caching and controlled delivery paths for assets and app traffic.",
+        "an internal CDN and proxy layer for caching assets and controlling delivery paths in one place.",
       proofLinks: [
         {
           label: "repo",
@@ -54,13 +58,15 @@ const infrastructure: DomainEntry = {
     {
       title: "sso reverse proxy",
       context:
-        "a reusable reverse-proxy sidecar that put SSO in front of ECS and EKS services without making every app rebuild the same edge behavior.",
+        "a reusable auth sidecar that put SSO in front of ECS and EKS services without rebuilding the same edge logic per app.",
       proofLinks: [
         {
           label: "repo",
           href: "https://github.com/tpr-datalabs/sso-reverse-proxy",
         },
       ],
+      overlapNote: "the protected apps live in nearby",
+      relatedDomains: ["product"],
     },
   ],
   relatedDomains: ["developer-experience", "analytics"],
