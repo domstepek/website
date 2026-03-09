@@ -5,7 +5,7 @@ const aiMl: DomainEntry = {
   order: 3,
   title: "ai / ml",
   summary:
-    "applied ai / ml systems where retrieval, model behavior, or agent orchestration changes what the workflow can do.",
+    "retrieval, model, and agent workflows where ai changes what the product can actually do.",
   seoDescription:
     "ai / ml domain page for retrieval flows, model-assisted tooling, and agent systems Dom builds.",
   thesis:

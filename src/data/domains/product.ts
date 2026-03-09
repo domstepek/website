@@ -5,7 +5,7 @@ const product: DomainEntry = {
   order: 4,
   title: "product",
   summary:
-    "internal and operational products that turn messy human processes into software people can use under pressure.",
+    "workflow-heavy software that turns messy operational processes into usable tools.",
   seoDescription:
     "product domain page for workflow-heavy internal software and operational systems Dom builds.",
   thesis:

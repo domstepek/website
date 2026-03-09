@@ -5,7 +5,7 @@ const analytics: DomainEntry = {
   order: 1,
   title: "analytics",
   summary:
-    "reporting surfaces, measurement workflows, and data tools that help teams trust what they are looking at.",
+    "reporting surfaces and measurement workflows that help teams trust the data in front of them.",
   seoDescription:
     "analytics domain page for reporting surfaces, measurement workflows, and data tools Dom builds.",
   thesis:

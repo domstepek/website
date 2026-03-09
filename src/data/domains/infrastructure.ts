@@ -5,7 +5,7 @@ const infrastructure: DomainEntry = {
   order: 2,
   title: "infrastructure",
   summary:
-    "platform foundations, deploy rails, and edge systems that make services easier to ship and safer to run.",
+    "deploy, routing, and platform foundations that make services easier to ship and safer to run.",
   seoDescription:
     "infrastructure domain page for deploy rails, kubernetes foundations, and edge systems Dom builds.",
   thesis:
