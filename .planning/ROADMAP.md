@@ -60,11 +60,11 @@ Plans:
   2. The homepage exposes all five domain pages as the primary next step, not a generic project dump.
   3. GitHub, LinkedIn, and email are visible on the homepage and open correctly.
   4. The homepage includes a freshness signal such as `currently`, `now`, or `last updated`.
-**Plans:** 1/3 plans executed
+**Plans:** 2/3 plans executed
 
 Plans:
 - [x] `03-01` Replace the placeholder homepage with shared hero, route, and home data
-- [ ] `03-02` Sharpen first-screen copy and text-first domain routing
+- [x] `03-02` Sharpen first-screen copy and text-first domain routing
 - [ ] `03-03` Add dist-first homepage validation to the site release gate
 
 ### Phase 4: Flagship Proof & Visuals
@@ -115,7 +115,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 |-------|----------------|--------|-----------|
 | 1. Publishing Foundation | 3/3 | Complete | 2026-03-09 |
 | 2. Domain Hubs & Supporting Work | 3/3 | Complete | 2026-03-09 |
-| 3. Homepage Positioning | 1/3 | In Progress | - |
+| 3. Homepage Positioning | 2/3 | In Progress | - |
 | 4. Flagship Proof & Visuals | 0/TBD | Not started | - |
 | 5. Personal Context & Notes | 0/TBD | Not started | - |
 | 6. Set up custom domain via is-a-dev/register | 0/TBD | Not started | - |

@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: ready_to_execute
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-03-09T23:51:01Z"
-last_activity: 2026-03-09 — 03-01 shipped the real homepage front door with shared data, contact links, and domain navigation; 03-02 is next
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-03-10T00:02:19Z"
+last_activity: 2026-03-10 — 03-02 sharpened the homepage framing, domain previews, and layout polish; 03-03 is next
 progress:
   total_phases: 6
   completed_phases: 2
   total_plans: 9
-  completed_plans: 7
-  percent: 78
+  completed_plans: 8
+  percent: 89
 ---
 
 # Project State
@@ -26,18 +26,18 @@ See: `.planning/PROJECT.md` (updated 2026-03-09)
 ## Current Position
 
 Phase: 3 of 6 (Homepage Positioning)
-Plan: 1 of 3 complete (`03-02` next)
-Status: Phase 3 in progress; ready to execute `03-02`
-Last activity: 2026-03-09 — 03-01 shipped the real homepage front door with shared data, contact links, and domain navigation; 03-02 is next
+Plan: 2 of 3 complete (`03-03` next)
+Status: Phase 3 in progress; ready to execute `03-03`
+Last activity: 2026-03-10 — 03-02 sharpened the homepage framing, domain previews, and layout polish; 03-03 is next
 
-Progress: [████████░░] 78%
+Progress: [█████████░] 89%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
+- Total plans completed: 8
 - Average duration: 6 min
-- Total execution time: 0.7 hours
+- Total execution time: 0.8 hours
 
 **By Phase:**
 
@@ -45,16 +45,17 @@ Progress: [████████░░] 78%
 |-------|-------|-------|----------|
 | 1 | 3 | 18 min | 6 min |
 | 2 | 3 | 18 min | 6 min |
-| 3 | 1 | 5 min | 5 min |
+| 3 | 2 | 9 min | 5 min |
 | 4 | 0 | - | - |
 | 5 | 0 | - | - |
 | 6 | 0 | - | - |
 
 **Recent Trend:**
-- Last 5 plans: 01-03 (9 min), 02-01 (5 min), 02-02 (7 min), 02-03 (6 min), 03-01 (5 min)
-- Trend: The homepage front door is now live, leaving copy/layout refinement and dist-first homepage validation to finish Phase 3.
+- Last 5 plans: 02-01 (5 min), 02-02 (7 min), 02-03 (6 min), 03-01 (5 min), 03-02 (4 min)
+- Trend: The homepage framing and layout now read clearly, leaving only the dist-first homepage validator to finish Phase 3.
 
 *Updated after each plan completion*
+| Phase 03 P02 | 4 min | 3 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -92,6 +93,9 @@ Recent decisions affecting current work:
 - [Phase 03]: Keep homepage-specific copy, contact links, freshness, and SEO fields in `src/data/home.ts` so the landing route stays thin and later copy work has one source of truth.
 - [Phase 03]: Render homepage navigation from the shared `domains` registry and `domainPath(slug)` helpers instead of inventing a second homepage-only link list. — This preserves the domain-first architecture and keeps internal links GitHub Pages-safe.
 - [Phase 03]: Keep `src/pages/index.astro` as a thin route that passes metadata into `BaseLayout` and renders `HomePage`. — This preserves the shared layout contract from Phase 1 and keeps page-shell logic centralized.
+- [Phase 03]: Keep the hero explicit about analytics, infrastructure, ai / ml, product, and developer experience so the first screen explains scope without extra narrative. — This keeps the homepage acting as an orientation layer instead of a vague personal statement.
+- [Phase 03]: Reuse the shared domain `summary` lines as homepage navigation copy instead of creating homepage-only blurbs. — This keeps the homepage and domain pages aligned as the content evolves.
+- [Phase 03]: Keep homepage layout styling in `src/styles/global.css`, with the domain list as the main navigation block and contact plus freshness as a lighter secondary cluster. — This preserves the minimal text-first baseline without inventing a second visual system.
 
 ### Roadmap Evolution
 
@@ -104,11 +108,11 @@ None right now.
 
 ### Blockers/Concerns
 
-- No Phase 3 `CONTEXT.md` was captured, so `03-02` and `03-03` should keep following `03-RESEARCH.md` plus existing project constraints unless new guidance is added first.
+- No Phase 3 `CONTEXT.md` was captured, so `03-03` should keep following `03-RESEARCH.md` plus existing project constraints unless new guidance is added first.
 - Flagship highlights and deeper role/decision proof remain intentionally deferred to Phase 4.
 
 ## Session Continuity
 
-Last session: 2026-03-09T23:51:01Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-03-10T00:01:20.691Z
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None
