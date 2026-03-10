@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 06-02-PLAN.md
-last_updated: "2026-03-10T04:19:55.995Z"
+stopped_at: Completed 03-05-PLAN.md (gap closure)
+last_updated: "2026-03-10T04:50:10.382Z"
 last_activity: 2026-03-10 — Phase 6 Plan 02 complete; CNAME validator in site gate, domain registration PR submitted
 progress:
   total_phases: 6
   completed_phases: 6
-  total_plans: 17
-  completed_plans: 17
+  total_plans: 19
+  completed_plans: 19
   percent: 100
 ---
 
@@ -62,6 +62,8 @@ Progress: [██████████] 100%
 | Phase 05 P03 | 4 min | 2 tasks | 3 files |
 | Phase 06 P01 | 1 min | 2 tasks | 4 files |
 | Phase 06 P02 | 3 min | 3 tasks | 2 files |
+| Phase 03 P04 | 8 min | 2 tasks | 7 files |
+| Phase 03 P05 | 5 min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -116,6 +118,11 @@ Recent decisions affecting current work:
 - [Phase 06]: Updated site description to visitor-facing casual lowercase voice matching existing site tone. — The old description was repo-style; the new one describes what Dom builds.
 - [Phase 06]: Replaced CI dynamic format() fallbacks with static custom domain strings while preserving vars.* override mechanism. — This ensures CI builds default to the custom domain without losing the ability to override via repository variables.
 - [Phase 06]: Recorded Task 2 as manually completed with corrected GitHub username (domstepek, not jstepek) and CNAME target (domstepek.github.io). — Plan originally had wrong username; user completed domain registration manually with correct values.
+- [Phase 03]: Used mix-blend-mode: lighten to blend white-background avatar into dark theme
+- [Phase 03]: Generated retro pixel cursor PNGs with raw Node.js PNG encoding (no canvas/sharp dependency)
+- [Phase 03]: Applied CRT scanline via fixed overlay with pointer-events:none and aria-hidden for zero interaction/a11y impact
+- [Phase 03]: Rewrote scope fields from sorting-rule pattern to natural visitor-facing domain descriptions
+- [Phase 03]: Changed section heading to 'the kind of work i do here' and kept thesis lines unchanged since they already read naturally
 
 ### Roadmap Evolution
 
@@ -132,6 +139,6 @@ None right now.
 
 ## Session Continuity
 
-Last session: 2026-03-10T04:15:00Z
-Stopped at: Completed 06-02-PLAN.md
-Resume file: .planning/phases/06-set-up-custom-domain-via-is-a-dev-register/06-02-SUMMARY.md
+Last session: 2026-03-10T04:49:59.986Z
+Stopped at: Completed 03-05-PLAN.md (gap closure)
+Resume file: None
