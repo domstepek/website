@@ -14,7 +14,7 @@ This roadmap builds the site in the order that best supports a domain-first port
 - [x] **Phase 2: Domain Hubs & Supporting Work** - Create the five domain pages and lock the domain-first information architecture.
 - [x] **Phase 3: Homepage Positioning** - Build the landing page that frames Dom's work and routes visitors into the domain pages.
 - [x] **Phase 4: Flagship Proof & Visuals** - Add deeper flagship highlights, stack details, and visuals where they materially improve understanding.
-- [ ] **Phase 5: Personal Context & Notes** - Finish the site with `how i work`, resume and `open to` framing, and the lightweight notes area.
+- [x] **Phase 5: Personal Context & Notes** - Finish the site with `how i work`, resume and `open to` framing, and the lightweight notes area.
 - [ ] **Phase 6: Set up custom domain via is-a-dev/register** - Configure a custom domain handoff and registration path for the published site.
 
 ## Phase Details
@@ -94,7 +94,7 @@ Plans:
   4. The notes area provides a lightweight index with short summaries.
   5. Each note listed in the index opens to an individual note page.
 **Plans:** 3/3 plans executed
-**Verification:** Automated checks passed; manual sign-off still needed via `05-VERIFICATION.md`
+**Verification:** Complete — automated and browser checks passed
 
 Plans:
 - [x] `05-01` Add dedicated about surface, resume section, and homepage teaser
@@ -103,13 +103,22 @@ Plans:
 
 ### Phase 6: Set up custom domain via is-a-dev/register
 
-**Goal:** [To be planned]
-**Requirements:** TBD
+**Goal:** Transition the site from `jstepek.github.io/website` to `jean-dominique-stepek.is-a.dev` by updating config defaults, adding CNAME, preparing the is-a-dev domain registration, extending the site validation gate, and providing a manual handoff checklist for DNS propagation and HTTPS enforcement.
+**Requirements:** N/A (infrastructure/deployment phase)
 **Depends on:** Phase 5
-**Plans:** 0 plans
+**Success Criteria** (what must be TRUE):
+  1. Site config defaults point to `https://jean-dominique-stepek.is-a.dev` with root base path `/`.
+  2. `public/CNAME` file exists with the correct custom domain.
+  3. CI workflow defaults reference the new domain and root base path.
+  4. Site description is visitor-facing in casual lowercase voice.
+  5. Phase 6 CNAME validator is part of the `validate:site` chain.
+  6. is-a-dev domain registration file is ready in the user's fork for PR submission.
+  7. All Phase 1-6 validators pass under the new config.
+**Plans:** 2 plans
 
 Plans:
-- [ ] TBD (run `$gsd-plan-phase 6` to break down this phase)
+- [ ] `06-01` Update site config defaults, CNAME, and CI workflow for custom domain
+- [ ] `06-02` Add Phase 6 validator, prepare is-a-dev registration, and manual handoff
 
 ## Progress
 
@@ -122,5 +131,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Domain Hubs & Supporting Work | 3/3 | Complete | 2026-03-09 |
 | 3. Homepage Positioning | 3/3 | Complete | 2026-03-09 |
 | 4. Flagship Proof & Visuals | 3/3 | Complete | 2026-03-10 |
-| 5. Personal Context & Notes | 3/3 | Verification needed | - |
-| 6. Set up custom domain via is-a-dev/register | 0/TBD | Not started | - |
+| 5. Personal Context & Notes | 3/3 | Complete | 2026-03-09 |
+| 6. Set up custom domain via is-a-dev/register | 0/2 | Not started | - |
