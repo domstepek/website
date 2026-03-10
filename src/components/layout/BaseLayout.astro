@@ -46,6 +46,9 @@ const faviconHref = assetPath(siteConfig.defaultFavicon);
     <meta property="og:image" content={pageOgImage} />
     <meta name="twitter:card" content="summary_large_image" />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <slot name="head" />
   </head>
   <body>
@@ -65,5 +68,6 @@ const faviconHref = assetPath(siteConfig.defaultFavicon);
         </div>
       </footer>
     </div>
+    <div class="crt-overlay" aria-hidden="true"></div>
   </body>
 </html>

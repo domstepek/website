@@ -8,11 +8,19 @@ const homeDomains = domains.map((domain) => ({
   href: domainPath(domain.slug),
 }));
 
+const home = homePage;
 const isExternalHttpLink = (href: string) => href.startsWith("https://");
 ---
 
 <div class="home-page" data-home-page>
   <section class="home-page__hero" data-home-hero>
+    <img
+      src={home.avatar}
+      alt="dom"
+      class="home-avatar"
+      width="160"
+      height="160"
+    />
     <p class="home-page__eyebrow">{homePage.eyebrow}</p>
     <h1>{homePage.title}</h1>
     <p class="home-page__lead">{homePage.lead}</p>

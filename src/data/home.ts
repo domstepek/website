@@ -14,6 +14,7 @@ export interface HomePersonalTeaser {
 }
 
 export interface HomePageData {
+  avatar: string;
   eyebrow: string;
   title: string;
   lead: string;
@@ -33,6 +34,7 @@ export interface HomePageData {
 }
 
 export const homePage = {
+  avatar: "/images/avatar.png",
   eyebrow: "dom stepek / systems, products, and tooling",
   title:
     "i work across analytics, infrastructure, ai / ml, product, and developer experience.",
