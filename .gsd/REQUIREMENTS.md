@@ -6,7 +6,82 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Active
 
-(No active requirements remain.)
+### R401 — Custom faded dither GPU shader renders as ambient page background
+- Class: differentiator
+- Status: active
+- Description: A custom-written GPU shader (WebGPU primary, WebGL2 fallback) renders an animated faded dither pattern as a full-bleed background canvas behind page content on all pages.
+- Why it matters: This adds a distinctive, technically impressive visual identity layer that reinforces the retro terminal aesthetic without relying on third-party shader libraries.
+- Source: user
+- Primary owning slice: M003/S01
+- Supporting slices: M003/S02
+- Validation: unmapped
+- Notes: The shader must be written from scratch — no `shaders` npm package or similar library. Visual reference: https://shaders.com/collection/faded-dither/43b4ed10-a99c-44ac-85b6-c593a29c4dd2
+
+### R402 — Shader uses site accent color palette
+- Class: quality-attribute
+- Status: active
+- Description: The shader's color palette derives from the site's existing CSS custom properties (greens, muted dark tones from `--accent`, `--accent-strong`, `--bg`, `--bg-elevated`).
+- Why it matters: The effect should feel cohesive with the site's retro terminal identity, not clash with it.
+- Source: user
+- Primary owning slice: M003/S01
+- Supporting slices: none
+- Validation: unmapped
+- Notes: Colors should be tunable via CSS variables or shader uniforms.
+
+### R403 — Shader reacts to cursor movement
+- Class: differentiator
+- Status: active
+- Description: The dither pattern responds subtly to mouse/pointer position — blobs shift, intensity changes, or patterns ripple near the cursor.
+- Why it matters: Cursor reactivity adds an interactive dimension that rewards engagement.
+- Source: user
+- Primary owning slice: M003/S02
+- Supporting slices: none
+- Validation: unmapped
+- Notes: Should be subtle, not distracting. Touch devices can fall back to ambient-only or touch-reactive.
+
+### R404 — Shader is present on all pages with per-page opt-out
+- Class: core-capability
+- Status: active
+- Description: The shader canvas renders site-wide via the shared layout, but individual pages can disable it via a prop or data attribute.
+- Why it matters: Some pages may not benefit from the effect — the system must support easy selective disabling without code changes to the shader itself.
+- Source: user
+- Primary owning slice: M003/S02
+- Supporting slices: none
+- Validation: unmapped
+- Notes: Default is on; opt-out via a layout prop like `disableShader={true}`.
+
+### R405 — WebGPU primary with WebGL2 fallback and graceful degradation
+- Class: quality-attribute
+- Status: active
+- Description: The shader runs on WebGPU where available, falls back to WebGL2 for older browsers, and degrades gracefully to the plain dark background when neither is available.
+- Why it matters: ~75% of browsers support WebGPU; WebGL2 covers the rest. No visitor should see a broken page.
+- Source: user
+- Primary owning slice: M003/S01
+- Supporting slices: M003/S03
+- Validation: unmapped
+- Notes: The dark background is already the site's default, so degradation is invisible.
+
+### R406 — Shader does not degrade page performance or accessibility
+- Class: quality-attribute
+- Status: active
+- Description: The shader respects `prefers-reduced-motion`, pauses when the tab is not visible, uses `requestAnimationFrame` properly, and does not cause layout shifts or block interaction.
+- Why it matters: A background effect must not hurt usability, battery life, or accessibility.
+- Source: inferred
+- Primary owning slice: M003/S03
+- Supporting slices: none
+- Validation: unmapped
+- Notes: Must also not interfere with existing CRT overlay or gate/unlock behavior.
+
+### R407 — Existing test suite and validation gates continue to pass
+- Class: continuity
+- Status: active
+- Description: The full `pnpm validate:site` release gate (20 browser tests + 3 dist validators) must pass after shader integration.
+- Why it matters: The shader is additive — it must not break existing site functionality.
+- Source: inferred
+- Primary owning slice: M003/S03
+- Supporting slices: none
+- Validation: unmapped
+- Notes: Run `pnpm validate:site` as final verification.
 
 ## Validated
 
@@ -135,12 +210,12 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Class: differentiator
 - Status: validated
 - Description: The shipped site uses a dark retro terminal aesthetic with typography and styling consistent across surfaces.
-- Why it matters: The visual system helps the site feel memorable without becoming gimmicky.
+- Why it matters: The visual system helps the site feel memorable without becoming heavy.
 - Source: user
 - Primary owning slice: M001/S03
 - Supporting slices: M001/S04, M001/S05
 - Validation: validated
-- Notes: M002 should preserve this aesthetic in the gate experience.
+- Notes: M003 shader should reinforce this aesthetic, not fight it.
 
 ## Deferred
 
@@ -223,10 +298,28 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Validation: n/a
 - Notes: Notes can be revisited later if desired.
 
+### R304 — Using a third-party shader library
+- Class: anti-feature
+- Status: out-of-scope
+- Description: M003 does not use the `shaders` npm package or any other third-party GPU shader library.
+- Why it matters: The user explicitly wants a custom-written shader — no library dependency for this effect.
+- Source: user
+- Primary owning slice: none
+- Supporting slices: none
+- Validation: n/a
+- Notes: The effect is inspired by shaders.com presets but built from scratch.
+
 ## Traceability
 
 | ID | Class | Status | Primary owner | Supporting | Proof |
 |---|---|---|---|---|---|
+| R401 | differentiator | active | M003/S01 | M003/S02 | unmapped |
+| R402 | quality-attribute | active | M003/S01 | none | unmapped |
+| R403 | differentiator | active | M003/S02 | none | unmapped |
+| R404 | core-capability | active | M003/S02 | none | unmapped |
+| R405 | quality-attribute | active | M003/S01 | M003/S03 | unmapped |
+| R406 | quality-attribute | active | M003/S03 | none | unmapped |
+| R407 | continuity | active | M003/S03 | none | unmapped |
 | R101 | primary-user-loop | validated | M002/S01 | M002/S04 | validated |
 | R102 | compliance/security | validated | M002/S01 | M002/S02, M002/S03, M002/S04 | validated |
 | R103 | primary-user-loop | validated | M002/S02 | M002/S04 | validated |
@@ -246,10 +339,11 @@ Use it to track what is actively in scope, what has been validated by completed 
 | R301 | anti-feature | out-of-scope | none | none | n/a |
 | R302 | anti-feature | out-of-scope | none | none | n/a |
 | R303 | anti-feature | out-of-scope | none | none | n/a |
+| R304 | anti-feature | out-of-scope | none | none | n/a |
 
 ## Coverage Summary
 
-- Active requirements: 0
-- Mapped to slices: 0
+- Active requirements: 7
+- Mapped to slices: 7
 - Validated: 12
 - Unmapped active requirements: 0

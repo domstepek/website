@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A personal website for Dom that gives recruiters, collaborators, and curious peers a fast read on the systems, products, infrastructure, and tooling he has built. The site is intentionally domain-first rather than a flat repo gallery, with a minimal homepage and deeper proof on portfolio pages.
+A personal website for Dom that gives recruiters, collaborators, and curious peers a fast read on the systems, products, infrastructure, and tooling he has built. The site is intentionally domain-first rather than a flat repo gallery, with a minimal homepage and deeper proof on portfolio pages. Protected domain pages are gated behind a passcode with a visual blur/reveal unlock flow.
 
 ## Core Value
 
@@ -14,7 +14,7 @@ M001 is shipped. The site runs as a static Astro site on GitHub Pages with a cus
 
 M002 is complete. All four slices (S01–S04) are shipped: `/`, `/about/`, and `/resume/` remain explicitly public, while `/domains/*` routes render a locked retro gate shell on cold load with request-access messaging (canonical email and LinkedIn links), a passcode form with SHA-256 hash validation, session-scoped unlock that carries across protected routes via a sessionStorage + localStorage bridge, and a CSS-driven blur-to-clear visual reveal with screenshot gallery rendering after unlock. The full milestone is proven by 20 browser tests, 3 dist validators, and the `pnpm validate:site` release gate chaining S01→S02→S03→S04. All 12 tracked requirements are validated; zero remain active.
 
-No active milestone. The next milestone has not been defined.
+M003 is in planning. Adding a custom GPU-accelerated faded dither shader as an ambient background effect across all pages with cursor reactivity.
 
 ## Architecture / Key Patterns
 
@@ -35,3 +35,4 @@ See `.gsd/REQUIREMENTS.md` for the explicit capability contract, requirement sta
 
 - [x] M001: Public portfolio foundation — Ship the domain-first personal site with homepage, domain hubs, flagship proof, about/resume, notes, and custom domain.
 - [x] M002: Portfolio access gate — Lightweight passcode gate protecting domain portfolio proof with session-scoped unlock, visual blur/reveal, request-access messaging, and 20-test regression coverage.
+- [ ] M003: GPU shader background — Custom faded dither shader (WebGPU + WebGL2 fallback) as ambient cursor-reactive background across all pages with per-page opt-out.
