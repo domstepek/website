@@ -33,11 +33,36 @@
     if (instance) {
       (window as any).__shaderInstance = instance;
 
+      // ── Cursor tracking ───────────────────────────────────────
       document.addEventListener("pointermove", (e: PointerEvent) => {
         instance.setPointer(
           e.clientX / window.innerWidth,
           e.clientY / window.innerHeight,
         );
+      });
+
+      // ── Reduced motion: freeze to one static frame ────────────
+      const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      function applyMotionPref(reduced: boolean) {
+        if (reduced) {
+          instance.pause();
+          canvas.dataset.shaderMotion = "frozen";
+        } else {
+          instance.resume();
+          canvas.dataset.shaderMotion = "animating";
+        }
+      }
+      applyMotionPref(motionQuery.matches);
+      motionQuery.addEventListener("change", (e) => applyMotionPref(e.matches));
+
+      // ── Tab visibility: pause when hidden ─────────────────────
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          instance.pause();
+        } else if (!motionQuery.matches) {
+          // Only resume if reduced-motion isn't active
+          instance.resume();
+        }
       });
     }
   }

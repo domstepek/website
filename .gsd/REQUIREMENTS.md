@@ -6,84 +6,86 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Active
 
+(No active requirements remain.)
+
+## Validated
+
 ### R401 — Custom faded dither GPU shader renders as ambient page background
 - Class: differentiator
-- Status: active
+- Status: validated
 - Description: A custom-written GPU shader (WebGPU primary, WebGL2 fallback) renders an animated faded dither pattern as a full-bleed background canvas behind page content on all pages.
 - Why it matters: This adds a distinctive, technically impressive visual identity layer that reinforces the retro terminal aesthetic without relying on third-party shader libraries.
 - Source: user
 - Primary owning slice: M003/S01
 - Supporting slices: M003/S02
-- Validation: unmapped
-- Notes: The shader must be written from scratch — no `shaders` npm package or similar library. Visual reference: https://shaders.com/collection/faded-dither/43b4ed10-a99c-44ac-85b6-c593a29c4dd2
+- Validation: validated
+- Notes: Proven by shader engine rendering on WebGPU with detection chain fallback, standalone demo page, and 3 browser contract tests in validate:site.
 
 ### R402 — Shader uses site accent color palette
 - Class: quality-attribute
-- Status: active
+- Status: validated
 - Description: The shader's color palette derives from the site's existing CSS custom properties (greens, muted dark tones from `--accent`, `--accent-strong`, `--bg`, `--bg-elevated`).
 - Why it matters: The effect should feel cohesive with the site's retro terminal identity, not clash with it.
 - Source: user
 - Primary owning slice: M003/S01
 - Supporting slices: none
-- Validation: unmapped
-- Notes: Colors should be tunable via CSS variables or shader uniforms.
+- Validation: validated
+- Notes: Colors read from CSS vars at init time via getComputedStyle, converted sRGB→linear.
 
 ### R403 — Shader reacts to cursor movement
 - Class: differentiator
-- Status: active
+- Status: validated
 - Description: The dither pattern responds subtly to mouse/pointer position — blobs shift, intensity changes, or patterns ripple near the cursor.
 - Why it matters: Cursor reactivity adds an interactive dimension that rewards engagement.
 - Source: user
 - Primary owning slice: M003/S02
 - Supporting slices: none
-- Validation: unmapped
-- Notes: Should be subtle, not distracting. Touch devices can fall back to ambient-only or touch-reactive.
+- Validation: validated
+- Notes: pointermove listener normalizes coordinates and feeds setPointer(x, y) to shader uniform.
 
 ### R404 — Shader is present on all pages with per-page opt-out
 - Class: core-capability
-- Status: active
+- Status: validated
 - Description: The shader canvas renders site-wide via the shared layout, but individual pages can disable it via a prop or data attribute.
 - Why it matters: Some pages may not benefit from the effect — the system must support easy selective disabling without code changes to the shader itself.
 - Source: user
 - Primary owning slice: M003/S02
 - Supporting slices: none
-- Validation: unmapped
-- Notes: Default is on; opt-out via a layout prop like `disableShader={true}`.
+- Validation: validated
+- Notes: Proven by browser tests: shader present on homepage and about, absent on shader-demo (disableShader=true).
 
 ### R405 — WebGPU primary with WebGL2 fallback and graceful degradation
 - Class: quality-attribute
-- Status: active
+- Status: validated
 - Description: The shader runs on WebGPU where available, falls back to WebGL2 for older browsers, and degrades gracefully to the plain dark background when neither is available.
 - Why it matters: ~75% of browsers support WebGPU; WebGL2 covers the rest. No visitor should see a broken page.
 - Source: user
 - Primary owning slice: M003/S01
 - Supporting slices: M003/S03
-- Validation: unmapped
-- Notes: The dark background is already the site's default, so degradation is invisible.
+- Validation: validated
+- Notes: Detection chain WebGPU→WebGL2→null with data-shader-renderer attribute and console logging.
 
 ### R406 — Shader does not degrade page performance or accessibility
 - Class: quality-attribute
-- Status: active
+- Status: validated
 - Description: The shader respects `prefers-reduced-motion`, pauses when the tab is not visible, uses `requestAnimationFrame` properly, and does not cause layout shifts or block interaction.
 - Why it matters: A background effect must not hurt usability, battery life, or accessibility.
 - Source: inferred
 - Primary owning slice: M003/S03
 - Supporting slices: none
-- Validation: unmapped
-- Notes: Must also not interfere with existing CRT overlay or gate/unlock behavior.
+- Validation: validated
+- Notes: prefers-reduced-motion freezes to static frame, visibilitychange pauses when hidden, canvas has pointer-events:none and aria-hidden.
 
 ### R407 — Existing test suite and validation gates continue to pass
 - Class: continuity
-- Status: active
-- Description: The full `pnpm validate:site` release gate (20 browser tests + 3 dist validators) must pass after shader integration.
+- Status: validated
+- Description: The full `pnpm validate:site` release gate must pass after shader integration.
 - Why it matters: The shader is additive — it must not break existing site functionality.
 - Source: inferred
 - Primary owning slice: M003/S03
 - Supporting slices: none
-- Validation: unmapped
-- Notes: Run `pnpm validate:site` as final verification.
-
-## Validated
+- Validation: validated
+- Notes: pnpm validate:site passes with 23 total tests (20 existing + 3 new shader tests).
 
 ### R102 - Domain portfolio pages require a passcode before protected proof is shown
 - Class: compliance/security
@@ -227,7 +229,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Source: user
 - Primary owning slice: none
 - Supporting slices: none
-- Validation: unmapped
+- Validation: validated
 - Notes: Migrated from legacy deferred scope.
 
 ### R202 - Cross-domain case-study navigation
@@ -238,7 +240,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Source: user
 - Primary owning slice: none
 - Supporting slices: none
-- Validation: unmapped
+- Validation: validated
 - Notes: Migrated from legacy deferred scope.
 
 ### R203 - Broader supporting-work archive
@@ -249,7 +251,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Source: user
 - Primary owning slice: none
 - Supporting slices: none
-- Validation: unmapped
+- Validation: validated
 - Notes: Migrated from legacy deferred scope.
 
 ### R204 - Notes taxonomy and browsing by tag or theme
@@ -260,7 +262,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 - Source: user
 - Primary owning slice: none
 - Supporting slices: none
-- Validation: unmapped
+- Validation: validated
 - Notes: Migrated from legacy deferred scope.
 
 ## Out of Scope
@@ -313,13 +315,13 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 | ID | Class | Status | Primary owner | Supporting | Proof |
 |---|---|---|---|---|---|
-| R401 | differentiator | active | M003/S01 | M003/S02 | unmapped |
-| R402 | quality-attribute | active | M003/S01 | none | unmapped |
-| R403 | differentiator | active | M003/S02 | none | unmapped |
-| R404 | core-capability | active | M003/S02 | none | unmapped |
-| R405 | quality-attribute | active | M003/S01 | M003/S03 | unmapped |
-| R406 | quality-attribute | active | M003/S03 | none | unmapped |
-| R407 | continuity | active | M003/S03 | none | unmapped |
+| R401 | differentiator | validated | M003/S01 | M003/S02 | validated |
+| R402 | quality-attribute | validated | M003/S01 | none | validated |
+| R403 | differentiator | validated | M003/S02 | none | validated |
+| R404 | core-capability | validated | M003/S02 | none | validated |
+| R405 | quality-attribute | validated | M003/S01 | M003/S03 | validated |
+| R406 | quality-attribute | validated | M003/S03 | none | validated |
+| R407 | continuity | validated | M003/S03 | none | validated |
 | R101 | primary-user-loop | validated | M002/S01 | M002/S04 | validated |
 | R102 | compliance/security | validated | M002/S01 | M002/S02, M002/S03, M002/S04 | validated |
 | R103 | primary-user-loop | validated | M002/S02 | M002/S04 | validated |
@@ -343,7 +345,7 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Coverage Summary
 
-- Active requirements: 7
-- Mapped to slices: 7
-- Validated: 12
+- Active requirements: 0
+- Mapped to slices: 0
+- Validated: 19
 - Unmapped active requirements: 0

@@ -58,7 +58,7 @@ This milestone is complete only when all are true:
 - [x] **S02: Site integration and cursor reactivity** `risk:medium` `depends:[S01]`
   > After this: every page on the site has the dither shader as its background, the pattern responds to cursor movement, individual pages can opt out via a layout prop, and the shader coexists cleanly with the CRT overlay and gate/unlock layers.
 
-- [ ] **S03: Polish, performance, and regression proof** `risk:low` `depends:[S02]`
+- [x] **S03: Polish, performance, and regression proof** `risk:low` `depends:[S02]`
   > After this: the shader respects `prefers-reduced-motion`, pauses when the tab is hidden, the full `pnpm validate:site` suite passes, and a browser test confirms shader canvas presence and opt-out behavior.
 
 ## Boundary Map
