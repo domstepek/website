@@ -1,0 +1,32 @@
+# Project
+
+## What This Is
+
+A personal website for Dom that gives recruiters, collaborators, and curious peers a fast read on the systems, products, infrastructure, and tooling he has built. The site is intentionally domain-first rather than a flat repo gallery, with a minimal homepage and deeper proof on portfolio pages.
+
+## Core Value
+
+Someone should be able to land on the site, quickly understand what kinds of complex systems Dom builds, and access the right level of proof for their context.
+
+## Current State
+
+M001 is shipped. The site runs as a static Astro site on GitHub Pages with a custom domain, a public homepage, public about and resume pages, a lightweight notes area, and five domain-based portfolio pages with flagship proof and supporting work.
+
+M002 is planned next. It will add a lightweight portfolio access gate so the public site stays discoverable while the deeper proof layer on domain pages is password-gated behind a simple session passcode flow.
+
+## Architecture / Key Patterns
+
+- Astro + TypeScript + plain CSS on GitHub Pages
+- Domain-first information architecture with route helpers in `src/lib/paths.ts`
+- Thin route files with shared data modules and shared presentational components
+- Dist-first validation scripts that verify shipped output before deploy
+- Public site surfaces remain lightweight, text-forward, and base-path aware
+
+## Capability Contract
+
+See `.gsd/REQUIREMENTS.md` for the explicit capability contract, requirement status, and coverage mapping.
+
+## Milestone Sequence
+
+- [x] M001: Public portfolio foundation — Ship the domain-first personal site with homepage, domain hubs, flagship proof, about/resume, notes, and custom domain.
+- [ ] M002: Portfolio access gate — Keep public positioning pages open while password-gating the deeper domain portfolio proof behind a simple static session passcode flow.
