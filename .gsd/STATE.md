@@ -1,18 +1,15 @@
 # GSD State
 
 **Active Milestone:** M003 — GPU Shader Background
-**Active Slice:** None
-**Active Task:** None
-**Phase:** Planning — roadmap written, ready for slice planning
+**Active Slice:** S01 — Faded Dither Shader Engine (COMPLETE)
+**Phase:** S01 complete — ready for S02 planning
 
 ## Recent Decisions
-- D023: Custom WebGPU + WebGL2 shader from scratch — no third-party library.
-- D024: Faded dither visual style — animated blobs through Bayer ordered dithering.
-- D025: Color palette derived from CSS custom properties.
-- D026: All pages via BaseLayout.astro with per-page opt-out prop.
+- D027: S01 verification via `/shader-demo/` page with `data-shader-renderer` attribute.
+- D028: Shader console logging contract — `[shader] using <renderer>` on success, warnings on failure.
 
 ## Blockers
 - None
 
 ## Next Action
-Plan S01 (faded dither shader engine) — decompose into tasks with must-haves.
+Plan and execute S02 — Site integration and cursor reactivity.

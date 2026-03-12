@@ -52,7 +52,7 @@ This milestone is complete only when all are true:
 
 ## Slices
 
-- [ ] **S01: Faded dither shader engine** `risk:high` `depends:[]`
+- [x] **S01: Faded dither shader engine** `risk:high` `depends:[]`
   > After this: opening `localhost:4321` shows an animated faded dither pattern filling the viewport as a standalone canvas, with soft green-tinted blobs dissolving through an ordered dither grid, running on WebGPU or WebGL2.
 
 - [ ] **S02: Site integration and cursor reactivity** `risk:medium` `depends:[S01]`

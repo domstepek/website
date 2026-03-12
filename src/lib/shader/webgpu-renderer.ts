@@ -1,0 +1,322 @@
+/// <reference types="@webgpu/types" />
+
+/**
+ * WebGPU renderer — implements the Renderer interface with a WGSL dither shader.
+ *
+ * Uses a fullscreen triangle (3 vertices via vertex_index, no vertex buffer).
+ * Embeds the Bayer 8×8 matrix directly in WGSL for GPU-side dithering.
+ */
+
+import type { Renderer, ShaderColors } from './types.js';
+
+// ── WGSL shader source ─────────────────────────────────────────────
+
+const SHADER_SOURCE = /* wgsl */ `
+
+struct Uniforms {
+  time: f32,
+  _pad0: f32,
+  resolution: vec2f,
+  pointer: vec2f,
+  color_bg: vec3f,
+  _pad1: f32,
+  color_accent: vec3f,
+  _pad2: f32,
+  color_strong: vec3f,
+  _pad3: f32,
+};
+
+@group(0) @binding(0) var<uniform> u: Uniforms;
+
+// Classic Bayer 8×8 ordered dither threshold matrix (normalized 0–1).
+const bayer8x8 = array<f32, 64>(
+  0.007813, 0.507813, 0.132813, 0.632813, 0.039063, 0.539063, 0.164063, 0.664063,
+  0.757813, 0.257813, 0.882813, 0.382813, 0.789063, 0.289063, 0.914063, 0.414063,
+  0.195313, 0.695313, 0.070313, 0.570313, 0.226563, 0.726563, 0.101563, 0.601563,
+  0.945313, 0.445313, 0.820313, 0.320313, 0.976563, 0.476563, 0.851563, 0.351563,
+  0.054688, 0.554688, 0.179688, 0.679688, 0.023438, 0.523438, 0.148438, 0.648438,
+  0.804688, 0.304688, 0.929688, 0.429688, 0.773438, 0.273438, 0.898438, 0.398438,
+  0.242188, 0.742188, 0.117188, 0.617188, 0.210938, 0.710938, 0.085938, 0.585938,
+  0.992188, 0.492188, 0.867188, 0.367188, 0.960938, 0.460938, 0.835938, 0.335938,
+);
+
+struct VertexOutput {
+  @builtin(position) position: vec4f,
+};
+
+// Fullscreen triangle from vertex_index — no vertex buffer needed.
+@vertex
+fn vs(@builtin(vertex_index) vi: u32) -> VertexOutput {
+  var pos = array<vec2f, 3>(
+    vec2f(-1.0, -1.0),
+    vec2f( 3.0, -1.0),
+    vec2f(-1.0,  3.0),
+  );
+  var out: VertexOutput;
+  out.position = vec4f(pos[vi], 0.0, 1.0);
+  return out;
+}
+
+// Generate animated gradient blobs from layered sine/cosine waves.
+fn blob_field(uv: vec2f, t: f32) -> f32 {
+  let slow = t * 0.15;
+  let mid  = t * 0.25;
+
+  // Three overlapping blob layers at different scales and speeds.
+  var v = 0.0;
+  v += 0.5 + 0.5 * sin(uv.x * 2.5 + slow * 1.3 + cos(uv.y * 1.8 + slow));
+  v += 0.5 + 0.5 * cos(uv.y * 3.1 - mid * 0.9 + sin(uv.x * 2.2 - slow * 0.7));
+  v += 0.5 + 0.5 * sin((uv.x + uv.y) * 1.7 + slow * 0.6);
+
+  // Pointer influence — gentle radial brightening near cursor.
+  if (u.pointer.x >= 0.0) {
+    let d = distance(uv, u.pointer);
+    v += 0.4 * smoothstep(0.35, 0.0, d);
+  }
+
+  return clamp(v / 3.0, 0.0, 1.0);
+}
+
+@fragment
+fn fs(@builtin(position) frag_coord: vec4f) -> @location(0) vec4f {
+  let uv = frag_coord.xy / u.resolution;
+
+  // Animated luminance field.
+  let lum = blob_field(uv, u.time);
+
+  // Bayer 8×8 ordered dithering.
+  let bx = u32(frag_coord.x) % 8u;
+  let by = u32(frag_coord.y) % 8u;
+  let threshold = bayer8x8[by * 8u + bx];
+
+  // Map through dither: below threshold → bg, above → accent/strong blend.
+  if (lum < threshold) {
+    return vec4f(u.color_bg, 1.0);
+  }
+
+  // Blend between accent and strong based on luminance intensity.
+  let blend = smoothstep(0.4, 0.85, lum);
+  let color = mix(u.color_accent, u.color_strong, blend);
+  return vec4f(color, 1.0);
+}
+`;
+
+// ── Uniform buffer layout ───────────────────────────────────────────
+
+// Layout (std140-aligned):
+//   0: time (f32)
+//   4: _pad (f32)
+//   8: resolution (vec2f)
+//  16: pointer (vec2f)
+//  24: _pad (8 bytes to align next vec3 to 16)
+//  32: color_bg (vec3f) + pad
+//  48: color_accent (vec3f) + pad
+//  64: color_strong (vec3f) + pad
+// Total: 80 bytes
+
+const UNIFORM_SIZE = 80;
+
+// ── WebGPU Renderer ─────────────────────────────────────────────────
+
+export class WebGPURenderer implements Renderer {
+  private device: GPUDevice | null = null;
+  private context: GPUCanvasContext | null = null;
+  private pipeline: GPURenderPipeline | null = null;
+  private uniformBuffer: GPUBuffer | null = null;
+  private bindGroup: GPUBindGroup | null = null;
+  private uniformData = new Float32Array(UNIFORM_SIZE / 4);
+  private canvasFormat: GPUTextureFormat = 'bgra8unorm';
+
+  async init(canvas: HTMLCanvasElement, colors: ShaderColors): Promise<boolean> {
+    // Guard: WebGPU API must exist.
+    if (!navigator.gpu) {
+      return false;
+    }
+
+    // Request adapter — may return null on unsupported hardware.
+    const adapter = await navigator.gpu.requestAdapter();
+    if (!adapter) {
+      return false;
+    }
+
+    // Request device — may throw or return null-ish on failure.
+    let device: GPUDevice;
+    try {
+      device = await adapter.requestDevice();
+    } catch {
+      return false;
+    }
+
+    // Acquire canvas context.
+    const ctx = canvas.getContext('webgpu');
+    if (!ctx) {
+      return false;
+    }
+
+    this.device = device;
+    this.context = ctx;
+
+    // Prefer the system's preferred format.
+    this.canvasFormat = navigator.gpu.getPreferredCanvasFormat();
+
+    ctx.configure({
+      device,
+      format: this.canvasFormat,
+      alphaMode: 'opaque',
+    });
+
+    // Create shader module with compilation error checking.
+    const module = device.createShaderModule({ code: SHADER_SOURCE });
+    const info = await module.getCompilationInfo();
+    const hasErrors = info.messages.some((m) => m.type === 'error');
+    if (hasErrors) {
+      for (const msg of info.messages) {
+        console.error(`[shader/webgpu] WGSL ${msg.type}: ${msg.message}`);
+      }
+      return false;
+    }
+
+    // Create render pipeline — fullscreen triangle, no vertex buffers.
+    this.pipeline = device.createRenderPipeline({
+      layout: 'auto',
+      vertex: {
+        module,
+        entryPoint: 'vs',
+      },
+      fragment: {
+        module,
+        entryPoint: 'fs',
+        targets: [{ format: this.canvasFormat }],
+      },
+      primitive: {
+        topology: 'triangle-list',
+      },
+    });
+
+    // Create uniform buffer.
+    this.uniformBuffer = device.createBuffer({
+      size: UNIFORM_SIZE,
+      usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
+    });
+
+    // Create bind group.
+    this.bindGroup = device.createBindGroup({
+      layout: this.pipeline.getBindGroupLayout(0),
+      entries: [
+        { binding: 0, resource: { buffer: this.uniformBuffer } },
+      ],
+    });
+
+    // Write initial colors into uniform data.
+    this.setColors(colors);
+
+    // Set initial resolution.
+    this.updateResolution(canvas.width, canvas.height);
+
+    // Default pointer off-screen.
+    this.uniformData[4] = -1;
+    this.uniformData[5] = -1;
+
+    // Listen for device loss.
+    device.lost.then((info) => {
+      console.warn(`[shader/webgpu] device lost: ${info.message}`);
+      this.device = null;
+    });
+
+    return true;
+  }
+
+  render(time: number, pointer: [number, number]): void {
+    if (!this.device || !this.context || !this.pipeline || !this.uniformBuffer || !this.bindGroup) {
+      return;
+    }
+
+    // Update time.
+    this.uniformData[0] = time;
+
+    // Update pointer.
+    this.uniformData[4] = pointer[0];
+    this.uniformData[5] = pointer[1];
+
+    // Upload uniforms.
+    this.device.queue.writeBuffer(this.uniformBuffer, 0, this.uniformData);
+
+    // Begin render pass.
+    let textureView: GPUTextureView;
+    try {
+      textureView = this.context.getCurrentTexture().createView();
+    } catch {
+      // Context may be lost or canvas resized — skip this frame.
+      return;
+    }
+
+    const encoder = this.device.createCommandEncoder();
+    const pass = encoder.beginRenderPass({
+      colorAttachments: [
+        {
+          view: textureView,
+          loadOp: 'clear' as GPULoadOp,
+          storeOp: 'store' as GPUStoreOp,
+          clearValue: { r: 0, g: 0, b: 0, a: 1 },
+        },
+      ],
+    });
+
+    pass.setPipeline(this.pipeline);
+    pass.setBindGroup(0, this.bindGroup);
+    pass.draw(3); // Fullscreen triangle.
+    pass.end();
+
+    this.device.queue.submit([encoder.finish()]);
+  }
+
+  resize(width: number, height: number): void {
+    if (!this.device || !this.context) return;
+
+    this.context.configure({
+      device: this.device,
+      format: this.canvasFormat,
+      alphaMode: 'opaque',
+    });
+
+    this.updateResolution(width, height);
+  }
+
+  destroy(): void {
+    this.uniformBuffer?.destroy();
+    this.device?.destroy();
+    this.uniformBuffer = null;
+    this.pipeline = null;
+    this.bindGroup = null;
+    this.context = null;
+    this.device = null;
+  }
+
+  // ── Private helpers ─────────────────────────────────────────────
+
+  private setColors(colors: ShaderColors): void {
+    // color_bg at offset 8 (float index 8 = byte 32)
+    this.uniformData[8] = colors.bg[0];
+    this.uniformData[9] = colors.bg[1];
+    this.uniformData[10] = colors.bg[2];
+    // pad at [11]
+
+    // color_accent at offset 12 (float index 12 = byte 48)
+    this.uniformData[12] = colors.accent[0];
+    this.uniformData[13] = colors.accent[1];
+    this.uniformData[14] = colors.accent[2];
+    // pad at [15]
+
+    // color_strong at offset 16 (float index 16 = byte 64)
+    this.uniformData[16] = colors.strong[0];
+    this.uniformData[17] = colors.strong[1];
+    this.uniformData[18] = colors.strong[2];
+    // pad at [19]
+  }
+
+  private updateResolution(width: number, height: number): void {
+    // resolution at offset 2 (float index 2 = byte 8)
+    this.uniformData[2] = width;
+    this.uniformData[3] = height;
+  }
+}
