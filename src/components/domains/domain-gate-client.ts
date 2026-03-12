@@ -12,6 +12,7 @@
 
 import type { DomainProofViewModel } from "../../data/domains/domain-view-model";
 import { renderDomainProof } from "./domain-proof-view";
+import { initGalleries } from "./screenshot-gallery-init";
 
 /* ── config ────────────────────────────────────────── */
 
@@ -96,8 +97,8 @@ function mountProof(config: GateConfig, proof: DomainProofViewModel) {
       }, 50);
     });
 
-    // Trigger gallery JS initialization for dynamically mounted galleries
-    document.dispatchEvent(new Event("astro:page-load"));
+    // Initialise gallery JS for dynamically mounted galleries
+    initGalleries();
   }
 }
 
