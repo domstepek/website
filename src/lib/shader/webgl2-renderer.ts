@@ -47,29 +47,46 @@ const float bayer8x8[64] = float[64](
   0.992188, 0.492188, 0.867188, 0.367188, 0.960938, 0.460938, 0.835938, 0.335938
 );
 
-// Generate animated gradient blobs from layered sine/cosine waves.
+// Generate animated gradient field with isolated bright regions.
 // Identical math to the WGSL blob_field function.
 float blob_field(vec2 uv, float t) {
-  float slow = t * 0.15;
-  float mid  = t * 0.25;
+  float slow = t * 0.06;
+  float drift = t * 0.09;
 
-  // Three overlapping blob layers at different scales and speeds.
-  float v = 0.0;
-  v += 0.5 + 0.5 * sin(uv.x * 2.5 + slow * 1.3 + cos(uv.y * 1.8 + slow));
-  v += 0.5 + 0.5 * cos(uv.y * 3.1 - mid * 0.9 + sin(uv.x * 2.2 - slow * 0.7));
-  v += 0.5 + 0.5 * sin((uv.x + uv.y) * 1.7 + slow * 0.6);
+  // Animated center positions for gradient blobs.
+  vec2 c1 = vec2(
+    0.3 + 0.3 * sin(slow * 0.7),
+    0.4 + 0.25 * cos(slow * 0.5)
+  );
+  vec2 c2 = vec2(
+    0.7 + 0.25 * cos(drift * 0.8),
+    0.6 + 0.3 * sin(drift * 0.6)
+  );
+  vec2 c3 = vec2(
+    0.5 + 0.35 * sin(slow * 0.4 + 1.5),
+    0.3 + 0.3 * cos(drift * 0.7 + 2.0)
+  );
 
-  // Normalize to 0–1, then fade heavily so only sparse dots appear.
-  v = v / 3.0;
+  // Radial falloff from each center — wide, soft gradients.
+  float d1 = 1.0 - smoothstep(0.0, 0.5, distance(uv, c1));
+  float d2 = 1.0 - smoothstep(0.0, 0.45, distance(uv, c2));
+  float d3 = 1.0 - smoothstep(0.0, 0.55, distance(uv, c3));
 
-  // Remap: push most values toward 0, only peaks survive.
-  // This creates the "faded" look — mostly dark with sparse dither dots.
-  v = smoothstep(0.4, 0.8, v) * 0.15;
+  // Combine: max keeps isolated shapes, slight additive overlap.
+  float v = max(max(d1, d2), d3);
+  v = v * v; // Square for sharper falloff.
 
-  // Pointer influence — gentle radial brightening near cursor.
+  // Diagonal sweep for organic variation.
+  float sweep = 0.5 + 0.5 * sin(uv.x * 1.5 - uv.y * 2.0 + slow * 1.2);
+  v *= 0.3 + 0.7 * sweep;
+
+  // Scale down.
+  v *= 0.45;
+
+  // Pointer influence.
   if (u_pointer.x >= 0.0) {
     float d = distance(uv, u_pointer);
-    v += 0.15 * smoothstep(0.3, 0.0, d);
+    v += 0.1 * smoothstep(0.2, 0.0, d);
   }
 
   return clamp(v, 0.0, 1.0);
@@ -78,24 +95,19 @@ float blob_field(vec2 uv, float t) {
 void main() {
   vec2 uv = gl_FragCoord.xy / u_resolution;
 
-  // Animated luminance field.
   float lum = blob_field(uv, u_time);
 
-  // Bayer 8×8 ordered dithering.
   int bx = int(gl_FragCoord.x) % 8;
   int by = int(gl_FragCoord.y) % 8;
   float threshold = bayer8x8[by * 8 + bx];
 
-  // Map through dither: below threshold → bg, above → accent/strong blend.
   if (lum < threshold) {
     fragColor = vec4(u_color_bg, 1.0);
     return;
   }
 
-  // Blend between accent and strong based on luminance intensity.
-  float blend = smoothstep(0.4, 0.85, lum);
-  vec3 color = mix(u_color_accent, u_color_strong, blend);
-  fragColor = vec4(color, 1.0);
+  vec3 dot_color = mix(u_color_bg, u_color_accent, 0.2);
+  fragColor = vec4(dot_color, 1.0);
 }
 `;
 

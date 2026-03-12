@@ -57,28 +57,46 @@ fn vs(@builtin(vertex_index) vi: u32) -> VertexOutput {
   return out;
 }
 
-// Generate animated gradient blobs from layered sine/cosine waves.
+// Generate animated gradient field with isolated bright regions.
+// Uses radial gradients and sweep functions that are zero over most of the canvas.
 fn blob_field(uv: vec2f, t: f32) -> f32 {
-  let slow = t * 0.15;
-  let mid  = t * 0.25;
+  let slow = t * 0.06;
+  let drift = t * 0.09;
 
-  // Three overlapping blob layers at different scales and speeds.
-  var v = 0.0;
-  v += 0.5 + 0.5 * sin(uv.x * 2.5 + slow * 1.3 + cos(uv.y * 1.8 + slow));
-  v += 0.5 + 0.5 * cos(uv.y * 3.1 - mid * 0.9 + sin(uv.x * 2.2 - slow * 0.7));
-  v += 0.5 + 0.5 * sin((uv.x + uv.y) * 1.7 + slow * 0.6);
+  // Animated center positions for gradient blobs.
+  let c1 = vec2f(
+    0.3 + 0.3 * sin(slow * 0.7),
+    0.4 + 0.25 * cos(slow * 0.5)
+  );
+  let c2 = vec2f(
+    0.7 + 0.25 * cos(drift * 0.8),
+    0.6 + 0.3 * sin(drift * 0.6)
+  );
+  let c3 = vec2f(
+    0.5 + 0.35 * sin(slow * 0.4 + 1.5),
+    0.3 + 0.3 * cos(drift * 0.7 + 2.0)
+  );
 
-  // Normalize to 0–1, then fade heavily so only sparse dots appear.
-  v = v / 3.0;
+  // Radial falloff from each center — wide, soft gradients.
+  let d1 = 1.0 - smoothstep(0.0, 0.5, distance(uv, c1));
+  let d2 = 1.0 - smoothstep(0.0, 0.45, distance(uv, c2));
+  let d3 = 1.0 - smoothstep(0.0, 0.55, distance(uv, c3));
 
-  // Remap: push most values toward 0, only peaks survive.
-  // This creates the "faded" look — mostly dark with sparse dither dots.
-  v = smoothstep(0.4, 0.8, v) * 0.15;
+  // Combine: max keeps isolated shapes, slight additive overlap.
+  var v = max(max(d1, d2), d3);
+  v = v * v; // Square for sharper falloff — darker edges.
+
+  // Add diagonal sweep for organic variation.
+  let sweep = 0.5 + 0.5 * sin(uv.x * 1.5 - uv.y * 2.0 + slow * 1.2);
+  v *= 0.3 + 0.7 * sweep;
+
+  // Scale down: keep max brightness low so dither creates subtle gradient.
+  v *= 0.45;
 
   // Pointer influence — gentle radial brightening near cursor.
   if (u.pointer.x >= 0.0) {
     let d = distance(uv, u.pointer);
-    v += 0.15 * smoothstep(0.3, 0.0, d);
+    v += 0.1 * smoothstep(0.2, 0.0, d);
   }
 
   return clamp(v, 0.0, 1.0);
@@ -88,7 +106,6 @@ fn blob_field(uv: vec2f, t: f32) -> f32 {
 fn fs(@builtin(position) frag_coord: vec4f) -> @location(0) vec4f {
   let uv = frag_coord.xy / u.resolution;
 
-  // Animated luminance field.
   let lum = blob_field(uv, u.time);
 
   // Bayer 8×8 ordered dithering.
@@ -96,15 +113,13 @@ fn fs(@builtin(position) frag_coord: vec4f) -> @location(0) vec4f {
   let by = u32(frag_coord.y) % 8u;
   let threshold = bayer8x8[by * 8u + bx];
 
-  // Map through dither: below threshold → bg, above → accent/strong blend.
   if (lum < threshold) {
     return vec4f(u.color_bg, 1.0);
   }
 
-  // Blend between accent and strong based on luminance intensity.
-  let blend = smoothstep(0.4, 0.85, lum);
-  let color = mix(u.color_accent, u.color_strong, blend);
-  return vec4f(color, 1.0);
+  // Dot color: subtle muted accent, barely above background.
+  let dot_color = mix(u.color_bg, u.color_accent, 0.2);
+  return vec4f(dot_color, 1.0);
 }
 `;
 
