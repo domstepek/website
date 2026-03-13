@@ -105,7 +105,10 @@ float ripple_field(vec2 uv, float t) {
 }
 
 void main() {
-  float pixel_size = 4.0;
+  // Scale pixel_size up on smaller viewports so dither dots stay visible on mobile.
+  // Resolution is in physical pixels (CSS × DPR), so thresholds account for retina:
+  // ~8px at ≤1200 physical (e.g. phones at 3x), ~4px at ≥2560 (desktop 2x / wide 1x).
+  float pixel_size = max(4.0, 8.0 - 4.0 * smoothstep(1200.0, 2560.0, u_resolution.x));
   vec2 snapped = floor(gl_FragCoord.xy / pixel_size);
   vec2 uv = (snapped + 0.5) * pixel_size / u_resolution;
 

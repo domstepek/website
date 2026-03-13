@@ -139,7 +139,10 @@ fn ripple_field(uv: vec2f, t: f32) -> f32 {
 @fragment
 fn fs(@builtin(position) frag_coord: vec4f) -> @location(0) vec4f {
   // Snap to pixel grid (4×4 blocks) for chunky dither dots.
-  let pixel_size = 4.0;
+  // Scale pixel_size up on smaller viewports so dither dots stay visible on mobile.
+  // Resolution is in physical pixels (CSS × DPR), so thresholds account for retina:
+  // ~8px at ≤1200 physical (e.g. phones at 3x), ~4px at ≥2560 (desktop 2x / wide 1x).
+  let pixel_size = max(4.0, 8.0 - 4.0 * smoothstep(1200.0, 2560.0, u.resolution.x));
   let snapped = floor(frag_coord.xy / pixel_size);
   let uv = (snapped + 0.5) * pixel_size / u.resolution;
 
