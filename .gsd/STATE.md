@@ -1,23 +1,17 @@
 # GSD State
 
-**Active Milestone:** None — all milestones complete
+**Active Milestone:** M006 — UI Polish — Domain Pages & Typography
 **Last Completed Milestone:** M005 — Next.js Migration
-**Phase:** Idle — ready for next milestone
+**Phase:** Planning complete — ready for slice execution
 
-## M005 Final Status
-- [x] S01 — Server-side portfolio gate on Next.js
-- [x] S02 — Public pages and notes pipeline
-- [x] S03 — Shader and interactive client components
-- [x] S04 — Vercel deployment, CI, and final integration
-- [x] M005-SUMMARY.md written
+## M006 Status
+- [ ] S01 — Title case, stack tag reorder, and flagship card readability
 
 ## Verification
 - ✅ `tsc --noEmit` → exits 0
 - ✅ `npm run build` → exits 0 (8 routes)
 - ✅ 18/18 Playwright tests pass against `next start`
 - ✅ All 20 requirements validated, 0 active
-- ✅ GitHub Actions CI workflow in place
-- ✅ AGENTS.md reflects Next.js stack
 
 ## Pending Manual Steps (Outside Agent Scope)
 - Set `GATE_HASH` env var in Vercel project dashboard
