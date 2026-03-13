@@ -47,51 +47,40 @@ const float bayer8x8[64] = float[64](
   0.992188, 0.492188, 0.867188, 0.367188, 0.960938, 0.460938, 0.835938, 0.335938
 );
 
-// Generate animated gradient field with isolated bright regions.
-// Blob centers are gravitationally attracted toward the cursor.
-float blob_field(vec2 uv, float t) {
-  float slow = t * 0.06;
-  float drift = t * 0.09;
+// Sweeping directional gradient — a wide beam that slowly rotates like a tail.
+float gradient_field(vec2 uv, float t) {
+  float slow = t * 0.05;
 
-  // Base animated center positions for gradient blobs.
-  vec2 c1 = vec2(
-    0.3 + 0.3 * sin(slow * 0.7),
-    0.4 + 0.25 * cos(slow * 0.5)
-  );
-  vec2 c2 = vec2(
-    0.7 + 0.25 * cos(drift * 0.8),
-    0.6 + 0.3 * sin(drift * 0.6)
-  );
-  vec2 c3 = vec2(
-    0.5 + 0.35 * sin(slow * 0.4 + 1.5),
-    0.3 + 0.3 * cos(drift * 0.7 + 2.0)
-  );
+  vec2 pivot = vec2(0.5 + 0.05 * sin(slow * 0.3), 0.5 + 0.05 * cos(slow * 0.4));
 
-  // Gravitational drift: gently pull blob centers toward cursor.
+  // Primary sweep.
+  float angle1 = slow * 0.7;
+  vec2 dir1 = vec2(cos(angle1), sin(angle1));
+  float proj1 = dot(uv - pivot, dir1);
+  float grad1 = smoothstep(-0.1, 0.6, proj1);
+  float dist = distance(uv, pivot);
+  float falloff1 = 1.0 - smoothstep(0.2, 0.9, dist);
+
+  // Secondary sweep.
+  float angle2 = slow * 0.45 + 2.1;
+  vec2 dir2 = vec2(cos(angle2), sin(angle2));
+  float proj2 = dot(uv - pivot, dir2);
+  float grad2 = smoothstep(-0.05, 0.5, proj2);
+  float falloff2 = 1.0 - smoothstep(0.15, 0.75, dist);
+
+  float v = grad1 * falloff1 * 0.7 + grad2 * falloff2 * 0.3;
+  v *= 0.55;
+
+  // Gravitational drift toward cursor.
   if (u_pointer.x >= 0.0) {
-    float pull = 0.15;
-    float attract1 = pull * smoothstep(0.8, 0.0, distance(c1, u_pointer));
-    float attract2 = pull * smoothstep(0.8, 0.0, distance(c2, u_pointer));
-    float attract3 = pull * smoothstep(0.8, 0.0, distance(c3, u_pointer));
-    c1 = mix(c1, u_pointer, attract1);
-    c2 = mix(c2, u_pointer, attract2);
-    c3 = mix(c3, u_pointer, attract3);
+    float cursor_pull = 0.08 * smoothstep(0.7, 0.0, distance(pivot, u_pointer));
+    vec2 pulled_pivot = mix(pivot, u_pointer, cursor_pull);
+    float pulled_dist = distance(uv, pulled_pivot);
+    float pulled_proj = dot(uv - pulled_pivot, dir1);
+    float pulled_grad = smoothstep(-0.1, 0.6, pulled_proj);
+    float pulled_falloff = 1.0 - smoothstep(0.2, 0.9, pulled_dist);
+    v = max(v, pulled_grad * pulled_falloff * 0.55 * 0.5);
   }
-
-  // Radial falloff from each center — wide, soft gradients.
-  float d1 = 1.0 - smoothstep(0.0, 0.5, distance(uv, c1));
-  float d2 = 1.0 - smoothstep(0.0, 0.45, distance(uv, c2));
-  float d3 = 1.0 - smoothstep(0.0, 0.55, distance(uv, c3));
-
-  // Combine: max keeps isolated shapes.
-  float v = max(max(d1, d2), d3);
-  v = v * v;
-
-  // Diagonal sweep for organic variation.
-  float sweep = 0.5 + 0.5 * sin(uv.x * 1.5 - uv.y * 2.0 + slow * 1.2);
-  v *= 0.3 + 0.7 * sweep;
-
-  v *= 0.56;
 
   return clamp(v, 0.0, 1.0);
 }
@@ -99,7 +88,7 @@ float blob_field(vec2 uv, float t) {
 void main() {
   vec2 uv = gl_FragCoord.xy / u_resolution;
 
-  float lum = blob_field(uv, u_time);
+  float lum = gradient_field(uv, u_time);
 
   int bx = int(gl_FragCoord.x) % 8;
   int by = int(gl_FragCoord.y) % 8;

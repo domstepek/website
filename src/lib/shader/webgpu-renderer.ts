@@ -57,53 +57,48 @@ fn vs(@builtin(vertex_index) vi: u32) -> VertexOutput {
   return out;
 }
 
-// Generate animated gradient field with isolated bright regions.
-// Blob centers are gravitationally attracted toward the cursor.
-fn blob_field(uv: vec2f, t: f32) -> f32 {
-  let slow = t * 0.06;
-  let drift = t * 0.09;
+// Sweeping directional gradient — a wide beam that slowly rotates like a tail.
+// Projects UV onto a rotating direction vector to create a diagonal gradient band.
+fn gradient_field(uv: vec2f, t: f32) -> f32 {
+  let slow = t * 0.05;
 
-  // Base animated center positions for gradient blobs.
-  var c1 = vec2f(
-    0.3 + 0.3 * sin(slow * 0.7),
-    0.4 + 0.25 * cos(slow * 0.5)
-  );
-  var c2 = vec2f(
-    0.7 + 0.25 * cos(drift * 0.8),
-    0.6 + 0.3 * sin(drift * 0.6)
-  );
-  var c3 = vec2f(
-    0.5 + 0.35 * sin(slow * 0.4 + 1.5),
-    0.3 + 0.3 * cos(drift * 0.7 + 2.0)
-  );
+  // Pivot near center with gentle drift.
+  let pivot = vec2f(0.5 + 0.05 * sin(slow * 0.3), 0.5 + 0.05 * cos(slow * 0.4));
 
-  // Gravitational drift: gently pull blob centers toward cursor.
-  // Strength falls off with distance so only nearby blobs are affected.
+  // Primary sweep: slowly rotating angle.
+  let angle1 = slow * 0.7;
+  let dir1 = vec2f(cos(angle1), sin(angle1));
+  let proj1 = dot(uv - pivot, dir1);
+  // Gradient: bright on the positive side, fading to dark.
+  let grad1 = smoothstep(-0.1, 0.6, proj1);
+
+  // Radial falloff from pivot so it doesn't fill the entire canvas.
+  let dist = distance(uv, pivot);
+  let falloff1 = 1.0 - smoothstep(0.2, 0.9, dist);
+
+  // Secondary sweep at different speed/angle for layered complexity.
+  let angle2 = slow * 0.45 + 2.1;
+  let dir2 = vec2f(cos(angle2), sin(angle2));
+  let proj2 = dot(uv - pivot, dir2);
+  let grad2 = smoothstep(-0.05, 0.5, proj2);
+  let falloff2 = 1.0 - smoothstep(0.15, 0.75, dist);
+
+  // Combine: primary dominant, secondary subtle.
+  var v = grad1 * falloff1 * 0.7 + grad2 * falloff2 * 0.3;
+
+  // Scale to keep overall brightness in the ditherable range.
+  v *= 0.55;
+
+  // Gravitational drift: pull the bright region toward cursor.
   if (u.pointer.x >= 0.0) {
-    let pull = 0.15; // max displacement toward cursor
-    let attract1 = pull * smoothstep(0.8, 0.0, distance(c1, u.pointer));
-    let attract2 = pull * smoothstep(0.8, 0.0, distance(c2, u.pointer));
-    let attract3 = pull * smoothstep(0.8, 0.0, distance(c3, u.pointer));
-    c1 = mix(c1, u.pointer, attract1);
-    c2 = mix(c2, u.pointer, attract2);
-    c3 = mix(c3, u.pointer, attract3);
+    let cursor_pull = 0.08 * smoothstep(0.7, 0.0, distance(pivot, u.pointer));
+    let pulled_pivot = mix(pivot, u.pointer, cursor_pull);
+    let pulled_dist = distance(uv, pulled_pivot);
+    let pulled_proj = dot(uv - pulled_pivot, dir1);
+    let pulled_grad = smoothstep(-0.1, 0.6, pulled_proj);
+    let pulled_falloff = 1.0 - smoothstep(0.2, 0.9, pulled_dist);
+    v = max(v, pulled_grad * pulled_falloff * 0.55 * 0.5);
   }
-
-  // Radial falloff from each center — wide, soft gradients.
-  let d1 = 1.0 - smoothstep(0.0, 0.5, distance(uv, c1));
-  let d2 = 1.0 - smoothstep(0.0, 0.45, distance(uv, c2));
-  let d3 = 1.0 - smoothstep(0.0, 0.55, distance(uv, c3));
-
-  // Combine: max keeps isolated shapes, slight additive overlap.
-  var v = max(max(d1, d2), d3);
-  v = v * v; // Square for sharper falloff — darker edges.
-
-  // Add diagonal sweep for organic variation.
-  let sweep = 0.5 + 0.5 * sin(uv.x * 1.5 - uv.y * 2.0 + slow * 1.2);
-  v *= 0.3 + 0.7 * sweep;
-
-  // Scale down: keep max brightness low so dither creates subtle gradient.
-  v *= 0.56;
 
   return clamp(v, 0.0, 1.0);
 }
@@ -112,7 +107,7 @@ fn blob_field(uv: vec2f, t: f32) -> f32 {
 fn fs(@builtin(position) frag_coord: vec4f) -> @location(0) vec4f {
   let uv = frag_coord.xy / u.resolution;
 
-  let lum = blob_field(uv, u.time);
+  let lum = gradient_field(uv, u.time);
 
   // Bayer 8×8 ordered dithering.
   let bx = u32(frag_coord.x) % 8u;
