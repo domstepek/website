@@ -2,16 +2,18 @@
 
 **Active Milestone:** M006 — UI Polish — Domain Pages & Typography
 **Last Completed Milestone:** M005 — Next.js Migration
-**Phase:** Planning complete — ready for slice execution
+**Phase:** S01 complete — slice done, pending merge
 
 ## M006 Status
-- [ ] S01 — Title case, stack tag reorder, and flagship card readability
+- [x] S01 — Title case, stack tag reorder, and flagship card readability `complete`
+  - [x] T01 — Title-case all project names in domain data files
+  - [x] T02 — Restructure flagship card layout and add `.flagship-list` CSS
 
 ## Verification
-- ✅ `tsc --noEmit` → exits 0
-- ✅ `npm run build` → exits 0 (8 routes)
-- ✅ 18/18 Playwright tests pass against `next start`
+- ✅ `pnpm build` → exits 0 (8 routes)
+- ✅ 18/18 Playwright tests pass against production build
 - ✅ All 20 requirements validated, 0 active
+- ✅ Visual inspection confirms all 3 domain pages render correctly at desktop and mobile
 
 ## Pending Manual Steps (Outside Agent Scope)
 - Set `GATE_HASH` env var in Vercel project dashboard

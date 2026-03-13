@@ -20,7 +20,7 @@ const product: DomainEntry = {
   flagships: [
     {
       slug: "sample-tracking",
-      title: "Sample tracking",
+      title: "Sample Tracking",
       summary:
         "The operational app for tracking sample shipments, statuses, exports, and recurring reporting — with automated regression testing so the workflow lived in software instead of scattered updates.",
       problem:
@@ -87,7 +87,7 @@ const product: DomainEntry = {
     },
     {
       slug: "supply-chain",
-      title: "Supply chain forecasting",
+      title: "Supply Chain Forecasting",
       summary:
         "A predictive analytics platform for inventory planning where the hard part was coordinating forecasting decisions across teams and fiscal seasons.",
       problem:
@@ -174,7 +174,7 @@ const product: DomainEntry = {
   ],
   supportingWork: [
     {
-      title: "Pricing app",
+      title: "Pricing App",
       context:
         "Helped set up the infrastructure and deployment for a dedicated pricing workflow app — the product and backend logic were led by other engineers, but I contributed the initial project scaffolding and deploy path.",
     },

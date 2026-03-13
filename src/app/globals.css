@@ -1135,6 +1135,27 @@ label[for], [onclick], [tabindex]:not([tabindex="-1"]) {
   font-size: 0.95rem;
 }
 
+/* ── Flagship lists ── */
+.site-main .flagship-list {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.site-main .flagship-list li {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0;
+}
+
+.site-main .flagship-list li::before {
+  content: '›';
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
 /* ── Mermaid diagram ── */
 .mermaid-diagram {
   overflow-x: auto;

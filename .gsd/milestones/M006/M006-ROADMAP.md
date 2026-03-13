@@ -43,7 +43,7 @@ This milestone is complete only when all are true:
 
 ## Slices
 
-- [ ] **S01: Title case, stack tag reorder, and flagship card readability** `risk:low` `depends:[]`
+- [x] **S01: Title case, stack tag reorder, and flagship card readability** `risk:low` `depends:[]`
   > After this: visiting any authenticated domain proof page shows title-cased project names, stack tags directly under the title, a header/body separator, accent-bordered section labels, and ›-prefixed list items with increased spacing — all 18 Playwright tests still pass.
 
 ## Boundary Map

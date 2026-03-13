@@ -20,7 +20,7 @@ const analyticsAi: DomainEntry = {
   flagships: [
     {
       slug: "collection-curator",
-      title: "Collection curator",
+      title: "Collection Curator",
       summary:
         "A full-stack analytics platform combining an operator-facing portal with real-time collaboration, a configurable curation table, a PowerPoint-style presentation builder, an AI chatbot, and a production API backend with AI layer — replacing scattered tools and ad hoc data pulls.",
       problem:
@@ -122,12 +122,12 @@ const analyticsAi: DomainEntry = {
   ],
   supportingWork: [
     {
-      title: "MCP tools & agent demo",
+      title: "MCP Tools & Agent Demo",
       context:
         "Wrote MCP tool definitions for the analytics platform and built a demo surface showing user-driven vs agent-driven actions — giving stakeholders a concrete example of model-driven tool use.",
     },
     {
-      title: "Bedrock utilities in Datalabs API",
+      title: "Bedrock Utilities in Datalabs API",
       context:
         "Bedrock-backed retrieve, converse, and knowledge-base helpers wired into a larger production API surface.",
     },

@@ -58,15 +58,32 @@ export function DomainProofPage({ domain }: DomainProofPageProps) {
           >
             <header className="flex flex-col gap-1">
               <h3 className="text-[var(--text)] text-[var(--step-1)]">{flagship.title}</h3>
+
+              {flagship.stack.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-1">
+                  {flagship.stack.map((tag) => (
+                    <span
+                      key={tag}
+                      className="border border-[var(--border)] px-2 py-0.5 text-xs text-[var(--muted)]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+
               <p className="text-[var(--muted)] text-sm">{flagship.role}</p>
             </header>
+
+            {/* Header / body separator */}
+            <div className="border-t border-[var(--border)]" />
 
             <p className="text-[var(--muted)] max-w-prose text-sm">{flagship.summary}</p>
 
             {/* Problem statement */}
             {flagship.problem && (
               <div className="flex flex-col gap-1">
-                <p className="text-[var(--text)] text-xs uppercase tracking-wider">Problem</p>
+                <p className="text-[var(--text)] text-xs uppercase tracking-wider border-l-2 border-[var(--accent)] pl-2">Problem</p>
                 <p className="text-[var(--muted)] max-w-prose text-sm">{flagship.problem}</p>
               </div>
             )}
@@ -74,8 +91,8 @@ export function DomainProofPage({ domain }: DomainProofPageProps) {
             {/* Constraints */}
             {flagship.constraints.length > 0 && (
               <div className="flex flex-col gap-1">
-                <p className="text-[var(--text)] text-xs uppercase tracking-wider">Constraints</p>
-                <ul className="flex flex-col gap-1 pl-4">
+                <p className="text-[var(--text)] text-xs uppercase tracking-wider border-l-2 border-[var(--accent)] pl-2">Constraints</p>
+                <ul className="flagship-list flex flex-col pl-4">
                   {flagship.constraints.map((constraint, i) => (
                     <li key={i} className="text-[var(--muted)] text-sm">
                       {constraint}
@@ -88,8 +105,8 @@ export function DomainProofPage({ domain }: DomainProofPageProps) {
             {/* Decisions */}
             {flagship.decisions.length > 0 && (
               <div className="flex flex-col gap-1">
-                <p className="text-[var(--text)] text-xs uppercase tracking-wider">Decisions</p>
-                <ul className="flex flex-col gap-1 pl-4">
+                <p className="text-[var(--text)] text-xs uppercase tracking-wider border-l-2 border-[var(--accent)] pl-2">Decisions</p>
+                <ul className="flagship-list flex flex-col pl-4">
                   {flagship.decisions.map((decision, i) => (
                     <li key={i} className="text-[var(--muted)] text-sm">
                       {decision}
@@ -101,27 +118,14 @@ export function DomainProofPage({ domain }: DomainProofPageProps) {
 
             {flagship.outcomes.length > 0 && (
               <div className="flex flex-col gap-1">
-                <p className="text-[var(--text)] text-xs uppercase tracking-wider">Outcomes</p>
-                <ul className="flex flex-col gap-1 pl-4">
+                <p className="text-[var(--text)] text-xs uppercase tracking-wider border-l-2 border-[var(--accent)] pl-2">Outcomes</p>
+                <ul className="flagship-list flex flex-col pl-4">
                   {flagship.outcomes.map((outcome, i) => (
                     <li key={i} className="text-[var(--muted)] text-sm">
                       {outcome}
                     </li>
                   ))}
                 </ul>
-              </div>
-            )}
-
-            {flagship.stack.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-1">
-                {flagship.stack.map((tag) => (
-                  <span
-                    key={tag}
-                    className="border border-[var(--border)] px-2 py-0.5 text-xs text-[var(--muted)]"
-                  >
-                    {tag}
-                  </span>
-                ))}
               </div>
             )}
 

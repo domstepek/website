@@ -3,7 +3,7 @@ import type { DomainEntry } from "./types";
 const developerExperience: DomainEntry = {
   slug: "developer-experience",
   order: 3,
-  title: "Developer experience",
+  title: "Developer Experience",
   summary:
     "Shared tooling and automation that help engineers ship faster and repeat less setup.",
   seoDescription:
@@ -20,7 +20,7 @@ const developerExperience: DomainEntry = {
   flagships: [
     {
       slug: "monorepo-template",
-      title: "Monorepo template",
+      title: "Monorepo Template",
       summary:
         "A pnpm-workspace monorepo foundation with shared configs, CI pipelines, and deployment conventions so new projects start from a proven baseline instead of from scratch.",
       problem:
@@ -67,7 +67,7 @@ const developerExperience: DomainEntry = {
     },
     {
       slug: "global-design-system",
-      title: "Global design system",
+      title: "Global Design System",
       summary:
         "A shared React component library and Storybook-backed baseline that gave two product surfaces one reusable UI system instead of repeated one-off components.",
       problem:
@@ -106,22 +106,22 @@ const developerExperience: DomainEntry = {
   ],
   supportingWork: [
     {
-      title: "Product team CLI",
+      title: "Product Team CLI",
       context:
         "An internal CLI for environment setup, config edits, and feature toggles so recurring team tasks became scripted instead of tribal knowledge.",
     },
     {
-      title: "Product migration scripts",
+      title: "Product Migration Scripts",
       context:
         "Migration tooling for moving analytics product data and config without turning rollouts into manual cleanup days.",
     },
     {
-      title: "CDK-EKS contributions",
+      title: "CDK-EKS Contributions",
       context:
         "Contributed AWS permissions and access patterns to the shared EKS platform foundation — the core CDK stacks and cluster setup were led by another engineer.",
     },
     {
-      title: "Stargazer applications",
+      title: "Stargazer Applications",
       context:
         "Tweaked Helm chart templates and environment values in the GitOps repo for service deployments on the shared EKS cluster — the ArgoCD and ApplicationSet setup was led by another engineer.",
     },
@@ -131,7 +131,7 @@ const developerExperience: DomainEntry = {
         "An internal CDN and proxy layer for caching assets and controlling delivery paths in one place.",
     },
     {
-      title: "SSO reverse proxy",
+      title: "SSO Reverse Proxy",
       context:
         "A reusable auth sidecar that put SSO in front of ECS and EKS services without rebuilding the same edge logic per app.",
     },
