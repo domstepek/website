@@ -38,7 +38,7 @@ function ul(items: string[], listClass?: string): HTMLUListElement {
 
 function proofLinksFragment(links: { label: string; href: string }[], linkAttr: string): DocumentFragment {
   const frag = document.createDocumentFragment();
-  frag.append(el("strong", undefined, "proof:"), " ");
+  frag.append(el("strong", undefined, "Proof:"), " ");
   links.forEach((link, i) => {
     frag.append(el("a", { [linkAttr]: "", href: link.href }, link.label));
     if (i < links.length - 1) frag.append(", ");
@@ -156,19 +156,19 @@ function renderFlagship(f: ResolvedFlagship): HTMLElement {
   // facts
   const facts = el("div", { class: "flagship__facts" });
   const problemP = el("p", { class: "domain-page__scope flagship__line", "data-flagship-problem": "" });
-  problemP.append(el("strong", undefined, "problem:"), " " + f.problem);
+  problemP.append(el("strong", undefined, "Problem:"), " " + f.problem);
   const roleP = el("p", { class: "domain-page__scope flagship__line", "data-flagship-role": "" });
-  roleP.append(el("strong", undefined, "role:"), " " + f.role);
+  roleP.append(el("strong", undefined, "Role:"), " " + f.role);
   facts.append(problemP, roleP);
   article.append(facts);
 
   // grid
   const grid = el("div", { class: "flagship__grid" });
   const gridSections: [string, string, string[]][] = [
-    ["constraints", "data-flagship-constraints", f.constraints],
-    ["decisions", "data-flagship-decisions", f.decisions],
-    ["outcomes", "data-flagship-outcomes", f.outcomes],
-    ["stack", "data-flagship-stack", f.stack],
+    ["Constraints", "data-flagship-constraints", f.constraints],
+    ["Decisions", "data-flagship-decisions", f.decisions],
+    ["Outcomes", "data-flagship-outcomes", f.outcomes],
+    ["Stack", "data-flagship-stack", f.stack],
   ];
   for (const [label, attr, items] of gridSections) {
     const section = el("section", { class: "flagship__group", [attr]: "" });
@@ -227,8 +227,8 @@ function renderSupportingItem(item: ResolvedSupportingItem): HTMLElement {
 
   if (item.overlapNote || item.relatedEntries.length > 0) {
     const p = el("p", { class: "supporting-work__overlap" });
-    p.append(el("strong", undefined, "overlap:"), " ");
-    p.append(item.overlapNote ? `${item.overlapNote} ` : "also touches ");
+    p.append(el("strong", undefined, "Overlap:"), " ");
+    p.append(item.overlapNote ? `${item.overlapNote} ` : "Also touches ");
     item.relatedEntries.forEach((entry, i) => {
       p.append(el("a", { href: entry.href }, entry.title));
       if (i < item.relatedEntries.length - 1) p.append(", ");
@@ -252,7 +252,7 @@ export function renderDomainProof(vm: DomainProofViewModel, homePath: string): H
 
   // back link
   const backP = el("p", { class: "domain-page__back" });
-  backP.append(el("a", { class: "domain-page__back-link", "data-back-home": "", href: homePath }, "back home"));
+  backP.append(el("a", { class: "domain-page__back-link", "data-back-home": "", href: homePath }, "Back home"));
   article.append(backP);
 
   // intro
@@ -266,11 +266,11 @@ export function renderDomainProof(vm: DomainProofViewModel, homePath: string): H
   // belongs-here
   const belongsSection = el("section", { class: "domain-page__section", "aria-labelledby": "belongs-here-heading" });
   belongsSection.append(
-    el("h2", { class: "domain-page__section-title", id: "belongs-here-heading" }, "the kind of work i do here"),
+    el("h2", { class: "domain-page__section-title", id: "belongs-here-heading" }, "The kind of work I do here"),
     ul(vm.belongsHere, "domain-page__list"),
   );
   const scopeP = el("p", { class: "domain-page__scope" });
-  scopeP.append(el("strong", undefined, "scope:"), " " + vm.scope);
+  scopeP.append(el("strong", undefined, "Scope:"), " " + vm.scope);
   belongsSection.append(scopeP);
   article.append(belongsSection);
 
@@ -281,7 +281,7 @@ export function renderDomainProof(vm: DomainProofViewModel, homePath: string): H
       "aria-labelledby": "flagship-highlights-heading",
       "data-flagship-highlights": "",
     });
-    section.append(el("h2", { class: "domain-page__section-title", id: "flagship-highlights-heading" }, "flagship highlights"));
+    section.append(el("h2", { class: "domain-page__section-title", id: "flagship-highlights-heading" }, "Flagship highlights"));
     for (const f of vm.flagships) section.append(renderFlagship(f));
     article.append(section);
   }
@@ -292,16 +292,16 @@ export function renderDomainProof(vm: DomainProofViewModel, homePath: string): H
     "aria-labelledby": "supporting-work-heading",
     "data-supporting-work": "",
   });
-  supportSection.append(el("h2", { class: "domain-page__section-title", id: "supporting-work-heading" }, "supporting work"));
+  supportSection.append(el("h2", { class: "domain-page__section-title", id: "supporting-work-heading" }, "Supporting work"));
   for (const item of vm.supportingItems) supportSection.append(renderSupportingItem(item));
   article.append(supportSection);
 
   // related domains
   if (vm.relatedDomains.length > 0) {
     const section = el("section", { class: "domain-page__section", "aria-labelledby": "related-domains-heading" });
-    section.append(el("h2", { class: "domain-page__section-title", id: "related-domains-heading" }, "nearby domains"));
+    section.append(el("h2", { class: "domain-page__section-title", id: "related-domains-heading" }, "Nearby domains"));
     const p = el("p", { class: "domain-page__nearby" });
-    p.append("when a project crosses boundaries, it usually lands closest to ");
+    p.append("When a project crosses boundaries, it usually lands closest to ");
     vm.relatedDomains.forEach((entry, i) => {
       p.append(el("a", { href: entry.href }, entry.title));
       if (i < vm.relatedDomains.length - 1) p.append(", ");

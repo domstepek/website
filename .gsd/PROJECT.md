@@ -10,11 +10,15 @@ Someone should be able to land on the site, quickly understand what kinds of com
 
 ## Current State
 
-M001 is shipped. The site runs as a static Astro site on GitHub Pages with a custom domain, a public homepage, public about and resume pages, a lightweight notes area, and five domain-based portfolio pages with flagship proof and supporting work.
+The site runs as a static Astro site on GitHub Pages with a custom domain. M001–M004 are complete.
 
-M002 is complete. All four slices (S01–S04) are shipped: `/`, `/about/`, and `/resume/` remain explicitly public, while `/domains/*` routes render a locked retro gate shell on cold load with request-access messaging (canonical email and LinkedIn links), a passcode form with SHA-256 hash validation, session-scoped unlock that carries across protected routes via a sessionStorage + localStorage bridge, and a CSS-driven blur-to-clear visual reveal with screenshot gallery rendering after unlock. The full milestone is proven by 20 browser tests, 3 dist validators, and the `pnpm validate:site` release gate chaining S01→S02→S03→S04. All 12 tracked requirements are validated; zero remain active.
+Public surfaces (`/`, `/about/`, `/resume/`, `/notes/*`) are directly accessible. Protected `/domains/*` routes render a locked retro gate shell on cold load with request-access messaging, a passcode form with SHA-256 hash validation, session-scoped unlock via sessionStorage + localStorage bridge, and a CSS-driven blur-to-clear visual reveal with screenshot gallery rendering after unlock.
 
-M003 is complete. Custom WebGPU/WebGL2 faded dither shader renders as ambient cursor-reactive background across all pages with per-page opt-out, reduced-motion freeze, tab-visibility pause, and 23-test regression coverage.
+A custom WebGPU/WebGL2 faded dither shader renders as an ambient cursor-reactive background across all pages with per-page opt-out, reduced-motion freeze, and tab-visibility pause.
+
+All visitor-facing copy uses sentence case with standard "I" capitalization (D031, superseding the original all-lowercase convention D003). The casual, direct tone is preserved.
+
+The full `pnpm validate:site` release gate runs 23 tests (9 cold-load + 4 gate unlock + 4 visual state + 2 notes + 1 assembled flow + 3 shader) plus 3 dist validators. All 19 validated requirements remain green; 1 active requirement (R301 — server-side auth) is scoped for M005.
 
 ## Architecture / Key Patterns
 
@@ -25,7 +29,8 @@ M003 is complete. Custom WebGPU/WebGL2 faded dither shader renders as ambient cu
 - Public site surfaces remain lightweight, text-forward, and base-path aware
 - Client-side passcode gate with SHA-256 hash validation and session-scoped unlock
 - CSS-driven blur-to-clear visual reveal with stable DOM marker contracts
-- 20 browser tests + 3 dist validators in `pnpm validate:site` release gate
+- 23 browser tests + 3 dist validators in `pnpm validate:site` release gate
+- Sentence case convention for all visitor-facing copy (D031)
 
 ## Capability Contract
 
@@ -36,4 +41,5 @@ See `.gsd/REQUIREMENTS.md` for the explicit capability contract, requirement sta
 - [x] M001: Public portfolio foundation — Ship the domain-first personal site with homepage, domain hubs, flagship proof, about/resume, notes, and custom domain.
 - [x] M002: Portfolio access gate — Lightweight passcode gate protecting domain portfolio proof with session-scoped unlock, visual blur/reveal, request-access messaging, and 20-test regression coverage.
 - [x] M003: GPU shader background — Custom faded dither shader (WebGPU + WebGL2 fallback) as ambient cursor-reactive background across all pages with per-page opt-out.
-- [ ] M004: Sentence case audit — Convert all visitor-facing copy from all-lowercase to sentence case with standard "I" capitalization, preserving casual tone.
+- [x] M004: Sentence case audit — Convert all visitor-facing copy from all-lowercase to sentence case with standard "I" capitalization, preserving casual tone.
+- [ ] M005: Next.js migration — Migrate from Astro/GitHub Pages to Next.js App Router on Vercel, with the portfolio gate upgraded from client-side SHA-256 to middleware + HttpOnly cookie server auth.

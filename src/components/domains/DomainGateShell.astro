@@ -22,14 +22,14 @@ const linkedInLink = homePage.contactLinks.find((c) => c.key === "linkedin");
   data-protected-proof-state="withheld"
 >
   <p class="domain-gate-shell__back">
-    <a class="domain-gate-shell__back-link" href={homePath}>back home</a>
+    <a class="domain-gate-shell__back-link" href={homePath}>Back home</a>
   </p>
 
   <header class="domain-gate-shell__header">
-    <p class="domain-gate-shell__eyebrow">protected case file</p>
+    <p class="domain-gate-shell__eyebrow">Protected case file</p>
     <h1 class="domain-gate-shell__title">{domain.title}</h1>
     <p class="domain-gate-shell__summary">
-      this lane holds the real operating proof — detailed case studies, decisions, and evidence — but it's gated until you have the passcode.
+      This lane holds the real operating proof — detailed case studies, decisions, and evidence — but it's gated until you have the passcode.
     </p>
   </header>
 
@@ -41,26 +41,26 @@ const linkedInLink = homePage.contactLinks.find((c) => c.key === "linkedin");
     </div>
 
     <div class="domain-gate-shell__status-row">
-      <p class="domain-gate-shell__label" id="domain-gate-shell-status-heading">status</p>
-      <p class="domain-gate-shell__value">locked boundary / proof withheld</p>
+      <p class="domain-gate-shell__label" id="domain-gate-shell-status-heading">Status</p>
+      <p class="domain-gate-shell__value">Locked boundary / proof withheld</p>
     </div>
 
     <p class="domain-gate-shell__thesis">{domain.thesis}</p>
 
     <div class="domain-gate-shell__grid">
       <section class="domain-gate-shell__card" aria-labelledby="domain-gate-shell-preview-heading">
-        <p class="domain-gate-shell__label" id="domain-gate-shell-preview-heading">inside this domain</p>
+        <p class="domain-gate-shell__label" id="domain-gate-shell-preview-heading">Inside this domain</p>
         <ul class="domain-gate-shell__list">
           {previewItems.map((item) => <li>{item}</li>)}
         </ul>
       </section>
 
       <section class="domain-gate-shell__card" aria-labelledby="domain-gate-shell-scope-heading">
-        <p class="domain-gate-shell__label" id="domain-gate-shell-scope-heading">current cold-load policy</p>
+        <p class="domain-gate-shell__label" id="domain-gate-shell-scope-heading">Current cold-load policy</p>
         <ul class="domain-gate-shell__list">
-          <li>detailed case studies stay out of shipped HTML</li>
-          <li>evidence blocks stay out of shipped HTML</li>
-          <li>this shell confirms the route is intentionally gated</li>
+          <li>Detailed case studies stay out of shipped HTML</li>
+          <li>Evidence blocks stay out of shipped HTML</li>
+          <li>This shell confirms the route is intentionally gated</li>
         </ul>
       </section>
     </div>
@@ -78,9 +78,9 @@ const linkedInLink = homePage.contactLinks.find((c) => c.key === "linkedin");
       <span></span>
     </div>
 
-    <p class="domain-gate-shell__label" id="gate-request-heading">request access</p>
+    <p class="domain-gate-shell__label" id="gate-request-heading">Request access</p>
     <p class="domain-gate-shell__request-copy">
-      if you'd like to see the full case studies, reach out directly — i'll send the passcode.
+      If you'd like to see the full case studies, reach out directly — I'll send the passcode.
     </p>
     <div class="domain-gate-shell__request-links">
       {emailLink && (
@@ -104,17 +104,17 @@ const linkedInLink = homePage.contactLinks.find((c) => c.key === "linkedin");
       <span></span>
     </div>
 
-    <p class="domain-gate-shell__label" id="gate-passcode-heading">passcode</p>
+    <p class="domain-gate-shell__label" id="gate-passcode-heading">Passcode</p>
 
     <form class="domain-gate-shell__form" data-gate-form autocomplete="off">
       <div class="domain-gate-shell__form-row">
-        <label for="gate-passcode" class="sr-only">enter passcode</label>
+        <label for="gate-passcode" class="sr-only">Enter passcode</label>
         <input
           id="gate-passcode"
           class="domain-gate-shell__input"
           data-gate-passcode-input
           type="password"
-          placeholder="enter passcode"
+          placeholder="Enter passcode"
           autocomplete="off"
           spellcheck="false"
         />
@@ -123,11 +123,11 @@ const linkedInLink = homePage.contactLinks.find((c) => c.key === "linkedin");
           data-gate-submit
           type="submit"
         >
-          unlock
+          Unlock
         </button>
       </div>
       <p class="domain-gate-shell__status" data-gate-status="idle">
-        <span class="domain-gate-shell__status-text" data-gate-status-text>ready</span>
+        <span class="domain-gate-shell__status-text" data-gate-status-text>Ready</span>
       </p>
     </form>
   </section>

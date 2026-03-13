@@ -267,16 +267,16 @@ Use it to track what is actively in scope, what has been validated by completed 
 
 ## Out of Scope
 
-### R301 - Strong backend or edge authentication for portfolio access
-- Class: anti-feature
-- Status: out-of-scope
-- Description: M002 does not introduce server-backed auth, edge auth, or a hosted identity layer in front of the site.
-- Why it matters: The site is deployed as a static GitHub Pages property, and the chosen milestone is a lightweight deterrent gate rather than a full auth system.
+### R301 - Server-side access control for portfolio gate
+- Class: compliance/security
+- Status: active
+- Description: The `/domains/*` gate uses server-side enforcement (Next.js middleware + HttpOnly cookie) so protected proof content is never sent to the client before authentication.
+- Why it matters: The previous client-side SHA-256 model shipped proof content in the HTML — a determined reader could extract it. Server-side enforcement means the content is simply never in the response until auth.
 - Source: user
-- Primary owning slice: none
+- Primary owning slice: M005/S03
 - Supporting slices: none
-- Validation: n/a
-- Notes: Revisit only if the hosting model changes.
+- Validation: pending
+- Notes: Was out-of-scope in M002 because the site was static GitHub Pages. Vercel deployment (M005) removes that constraint.
 
 ### R302 - Making the whole site private
 - Class: anti-feature
@@ -338,14 +338,14 @@ Use it to track what is actively in scope, what has been validated by completed 
 | R202 | differentiator | deferred | none | none | unmapped |
 | R203 | core-capability | deferred | none | none | unmapped |
 | R204 | differentiator | deferred | none | none | unmapped |
-| R301 | anti-feature | out-of-scope | none | none | n/a |
+| R301 | compliance/security | active | M005/S03 | none | pending |
 | R302 | anti-feature | out-of-scope | none | none | n/a |
 | R303 | anti-feature | out-of-scope | none | none | n/a |
 | R304 | anti-feature | out-of-scope | none | none | n/a |
 
 ## Coverage Summary
 
-- Active requirements: 0
-- Mapped to slices: 0
+- Active requirements: 1
+- Mapped to slices: 1
 - Validated: 19
 - Unmapped active requirements: 0

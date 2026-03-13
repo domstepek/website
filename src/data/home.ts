@@ -35,47 +35,47 @@ export interface HomePageData {
 
 export const homePage = {
   avatar: "/images/avatar.png",
-  eyebrow: "dom stepek / systems, products, and tooling",
+  eyebrow: "Dom Stepek / Systems, products, and tooling",
   title:
-    "i work across product, analytics & ai, and developer experience.",
+    "I work across product, analytics & AI, and developer experience.",
   lead:
-    "most of what i build sits where data, platform, workflow, and internal tooling overlap — the kind of work that only makes sense when you see the full loop.",
+    "Most of what I build sits where data, platform, workflow, and internal tooling overlap — the kind of work that only makes sense when you see the full loop.",
   domainIntro:
-    "pick the domain that matches the problem.",
+    "Pick the domain that matches the problem.",
   personalTeaser: {
-    heading: "personal context",
+    heading: "Personal context",
     body:
-      "if you want the shorter version of how i work, what kinds of teams i fit best, and where the compact resume lives, start here.",
-    aboutLabel: "about",
-    resumeLabel: "resume",
+      "If you want the shorter version of how I work, what kinds of teams I fit best, and where the compact resume lives, start here.",
+    aboutLabel: "About",
+    resumeLabel: "Resume",
   },
-  contactHeading: "contact",
+  contactHeading: "Contact",
   contactLinks: [
     {
       key: "github",
-      label: "github",
+      label: "GitHub",
       href: "https://github.com/domstepek",
     },
     {
       key: "linkedin",
-      label: "linkedin",
+      label: "LinkedIn",
       href: "https://linkedin.com/in/jean-dominique-stepek",
     },
     {
       key: "email",
-      label: "email",
+      label: "Email",
       href: "mailto:domstepek@gmail.com",
     },
   ],
   freshness: {
-    label: "currently",
+    label: "Currently",
     value:
-      "exploring agent-style workflows and how model context protocol changes the shape of internal tooling.",
-    note: "last updated march 2026.",
+      "Exploring agent-style workflows and how model context protocol changes the shape of internal tooling.",
+    note: "Last updated March 2026.",
   },
   seo: {
-    title: "systems, products, and tooling",
+    title: "Systems, products, and tooling",
     description:
-      "homepage for dom's work across product systems, analytics & ai tooling, and developer experience.",
+      "Homepage for Dom's work across product systems, analytics & AI tooling, and developer experience.",
   },
 } satisfies HomePageData;

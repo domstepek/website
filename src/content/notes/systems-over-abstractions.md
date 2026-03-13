@@ -1,6 +1,6 @@
 ---
-title: systems over abstractions
-summary: the abstraction usually is not the problem; the missing system boundary is.
+title: Systems over abstractions
+summary: The abstraction usually is not the problem; the missing system boundary is.
 published: 2026-03-10
 ---
 

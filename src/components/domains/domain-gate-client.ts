@@ -143,12 +143,12 @@ function persistUnlock(config: GateConfig) {
 async function attemptUnlock(passcode: string, config: GateConfig, proof: DomainProofViewModel): Promise<boolean> {
   const inputHash = await sha256(passcode);
   if (inputHash !== config.hash) {
-    setGateStatus("error", "invalid passcode");
+    setGateStatus("error", "Invalid passcode");
     return false;
   }
 
   persistUnlock(config);
-  setGateStatus("unlocked", "access granted");
+  setGateStatus("unlocked", "Access granted");
   transitionToOpen();
   mountProof(config, proof);
   return true;
@@ -179,7 +179,7 @@ export function initDomainGate() {
     e.preventDefault();
     const passcode = input.value.trim();
     if (!passcode) {
-      setGateStatus("error", "enter a passcode");
+      setGateStatus("error", "Enter a passcode");
       return;
     }
     await attemptUnlock(passcode, config, proof);

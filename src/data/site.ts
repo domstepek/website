@@ -12,10 +12,10 @@ const normalizeBasePath = (value: string | undefined) => {
 const resolveSiteUrl = (value: string | undefined) => new URL(value ?? DEFAULT_SITE_URL).origin;
 
 export const siteConfig = {
-  name: "dom",
-  defaultTitle: "dom | systems, products, and tooling",
+  name: "Dom",
+  defaultTitle: "Dom | Systems, products, and tooling",
   defaultDescription:
-    "dom builds product systems, analytics & ai tooling, and developer experience infrastructure.",
+    "Dom builds product systems, analytics & AI tooling, and developer experience infrastructure.",
   siteUrl: resolveSiteUrl(import.meta.env.PUBLIC_SITE_URL),
   basePath: normalizeBasePath(import.meta.env.PUBLIC_BASE_PATH ?? DEFAULT_BASE_PATH),
   defaultSocialImage: "og-default.png",

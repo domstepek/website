@@ -8,7 +8,7 @@ const { systems, product, collaboration } = personalPage.howIWork.principles;
 
 <div class="personal-page" data-personal-page data-route-visibility="public" data-gate-state="open">
   <p class="personal-page__back">
-    <a class="personal-page__back-link" href={homePath}>back home</a>
+    <a class="personal-page__back-link" href={homePath}>Back home</a>
   </p>
 
   <TerminalPanel>
@@ -53,14 +53,14 @@ const { systems, product, collaboration } = personalPage.howIWork.principles;
 
     <div class="personal-page__groups">
       <section class="personal-page__group">
-        <h3 class="personal-page__group-title">role modes</h3>
+        <h3 class="personal-page__group-title">Role modes</h3>
         <ul class="personal-page__list">
           {personalPage.openTo.roles.map((role) => <li>{role}</li>)}
         </ul>
       </section>
 
       <section class="personal-page__group">
-        <h3 class="personal-page__group-title">best-fit problems</h3>
+        <h3 class="personal-page__group-title">Best-fit problems</h3>
         <ul class="personal-page__list">
           {personalPage.openTo.problemSpaces.map((problemSpace) => <li>{problemSpace}</li>)}
         </ul>
@@ -68,7 +68,7 @@ const { systems, product, collaboration } = personalPage.howIWork.principles;
     </div>
 
     <section class="personal-page__group">
-      <h3 class="personal-page__group-title">boundaries</h3>
+      <h3 class="personal-page__group-title">Boundaries</h3>
       <ul class="personal-page__list">
         {personalPage.openTo.boundaries.map((boundary) => <li>{boundary}</li>)}
       </ul>
@@ -89,7 +89,7 @@ const { systems, product, collaboration } = personalPage.howIWork.principles;
       {personalPage.resume.highlights.map((highlight) => <li>{highlight}</li>)}
     </ul>
     <p class="personal-page__note">
-      {personalPage.resume.note} <a href={resumePath}>full resume</a>
+      {personalPage.resume.note} <a href={resumePath}>Full resume</a>
     </p>
   </section>
 

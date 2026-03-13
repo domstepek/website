@@ -1,6 +1,6 @@
 ---
-title: keep the path explicit
-summary: a surprising amount of delivery friction comes from pretending the route is obvious when it is not.
+title: Keep the path explicit
+summary: A surprising amount of delivery friction comes from pretending the route is obvious when it is not.
 published: 2026-03-09
 ---
 

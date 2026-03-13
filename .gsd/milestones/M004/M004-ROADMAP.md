@@ -43,7 +43,7 @@ This milestone is complete only when all are true:
 
 ## Slices
 
-- [ ] **S01: Sentence case all visitor-facing copy and remove lowercase CSS** `risk:low` `depends:[]`
+- [x] **S01: Sentence case all visitor-facing copy and remove lowercase CSS** `risk:low` `depends:[]`
   > After this: A visitor can browse every page on the site and see sentence-cased copy with capitalized "I" throughout, with no CSS forcing lowercase — confirmed by `pnpm validate:site` (23 tests) and a browser walkthrough of all page types including both locked and unlocked domain views.
 
 ## Boundary Map
