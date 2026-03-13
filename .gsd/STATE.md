@@ -1,16 +1,15 @@
 # GSD State
 
-**Active Milestone:** None
-**Active Slice:** None
+**Active Milestone:** M004 — Sentence Case Audit
+**Active Slice:** None (roadmap planned, pending execution)
 **Active Task:** None
-**Phase:** Idle — M003 complete, no active milestone
+**Phase:** Planning complete — ready for S01 execution
 
 ## Recent Decisions
-- D029: Canvas as first child of body at z-index -1 for stacking context isolation.
-- D030: /shader-demo/ passes disableShader to avoid double-canvas.
+- D031: Sentence case replaces all-lowercase (supersedes D003).
 
 ## Blockers
 - None
 
 ## Next Action
-Define the next milestone or work from the deferred requirements backlog (R201–R204).
+Plan and execute M004/S01 — sentence case all visitor-facing copy and remove lowercase CSS.
