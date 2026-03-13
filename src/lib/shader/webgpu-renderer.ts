@@ -118,8 +118,8 @@ fn fs(@builtin(position) frag_coord: vec4f) -> @location(0) vec4f {
     return vec4f(u.color_bg, 1.0);
   }
 
-  // Dot color: subtle muted accent, barely above background.
-  let dot_color = mix(u.color_bg, u.color_accent, 0.28);
+  // Dot color: charcoal gray — bg lightened toward neutral gray, no green tint.
+  let dot_color = u.color_bg + vec3f(0.08, 0.08, 0.08);
   return vec4f(dot_color, 1.0);
 }
 `;

@@ -99,7 +99,8 @@ void main() {
     return;
   }
 
-  vec3 dot_color = mix(u_color_bg, u_color_accent, 0.28);
+  // Dot color: charcoal gray — bg lightened toward neutral gray, no green tint.
+  vec3 dot_color = u_color_bg + vec3(0.08, 0.08, 0.08);
   fragColor = vec4(dot_color, 1.0);
 }
 `;
