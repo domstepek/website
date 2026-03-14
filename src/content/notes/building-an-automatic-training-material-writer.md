@@ -37,6 +37,18 @@ flowchart TD
     H --> J
     I --> J
     J --> K[Fumadocs site]
+
+    subgraph future["✦ Future development"]
+        SC[E2E screenshots\nauto-captured on each run]
+        PD[Automatic product demo\ngenerator]
+        SC --> PD
+    end
+
+    C -.-> SC
+    J -.-> PD
+
+    classDef futureNode fill:#0d1f0d,stroke:#6fba7f,stroke-dasharray:5 5,color:#9acc9a
+    class SC,PD futureNode
 ```
 
 E2E tests turned out to be the most valuable source. A Cypress test that walks through creating a sample, assigning it to a tracking group, and validating the status update is essentially a user workflow written in code. The agent restructures that into prose with screenshots placeholders and callouts for the parts users typically get wrong — which it learns from Slack messages asking about those exact steps.
@@ -111,10 +123,25 @@ The Fumadocs site is the first consumer, but the training materials are structur
 There's also a guided walkthrough layer on the roadmap — interactive tutorials embedded in the platform itself, generated from the same underlying content. The training materials become the single source that powers static docs, chat agent context, and in-app guidance. Three surfaces, one authoring pipeline, zero manual maintenance.
 
 ```mermaid
-flowchart LR
-    A[Training materials\nsingle source] --> B[Fumadocs site\nstatic docs]
+flowchart TD
+    A[Training materials\nsingle source]
+
+    A --> B[Fumadocs site\nstatic docs]
     A --> C[Chat agent\nLLM context]
-    A --> D[In-app guidance\ninteractive tutorials]
+
+    subgraph future["✦ Future development"]
+        D[Knowledge base\nstructured AI retrieval]
+        E[Automatic product demos\nE2E screenshots + docs]
+        F[On-the-fly guided walkthroughs\ngenerated per user context]
+        D --> F
+        E --> F
+    end
+
+    A --> D
+    A --> E
+
+    classDef futureNode fill:#0d1f0d,stroke:#6fba7f,stroke-dasharray:5 5,color:#9acc9a
+    class D,E,F futureNode
 ```
 
 ## What I'd do differently
