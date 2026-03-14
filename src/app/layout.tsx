@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Analytics } from '@vercel/analytics/next';
 import ShaderBackground from '@/components/shader/ShaderBackground';
 import { siteConfig } from '@/data/site';
 import './globals.css';
@@ -50,6 +51,7 @@ export default function RootLayout({
           </div>
         </footer>
         <div className="crt-overlay" aria-hidden="true" />
+        <Analytics />
       </body>
     </html>
   );
