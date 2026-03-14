@@ -36,7 +36,7 @@ export function HomePage() {
           data-home-domain-nav
         >
           <div className="home-page__section-copy">
-            <h2 id="home-domain-nav-title">Pick a domain</h2>
+            <h2 id="home-domain-nav-title">Pick a Domain</h2>
             <p className="home-page__domain-intro">{homePage.domainIntro}</p>
           </div>
           <ul className="home-page__domain-list">

@@ -44,7 +44,7 @@ export const homePage = {
   domainIntro:
     "Pick the domain that matches the problem.",
   personalTeaser: {
-    heading: "Personal context",
+    heading: "Personal Context",
     body:
       "How I work, what kinds of teams I fit best, and where the compact resume lives. I also keep an engineering journal with notes on what I'm building and how.",
     aboutLabel: "About",
