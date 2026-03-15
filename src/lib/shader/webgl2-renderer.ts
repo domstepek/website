@@ -154,7 +154,23 @@ export class WebGL2Renderer implements Renderer {
   private canvas: HTMLCanvasElement | null = null;
 
   async init(canvas: HTMLCanvasElement, colors: ShaderColors): Promise<boolean> {
-    const gl = canvas.getContext('webgl2');
+    // preserveDrawingBuffer: true — keeps the last rendered frame in the buffer between rAF ticks.
+    // On iOS, the scroll compositor runs on a separate thread and may composite the canvas
+    // between frames. Without this, the cleared buffer shows as a black flash during scroll.
+    //
+    // alpha: false — canvas is a full-viewport opaque background; no alpha blending needed.
+    //   Reduces compositor work and avoids iOS alpha premultiplication quirks.
+    //
+    // antialias: false — the dither shader is intentionally pixelated; MSAA adds GPU cost
+    //   for no visual benefit here, especially on mobile.
+    //
+    // powerPreference: 'low-power' — mobile battery hint.
+    const gl = canvas.getContext('webgl2', {
+      preserveDrawingBuffer: true,
+      alpha: false,
+      antialias: false,
+      powerPreference: 'low-power',
+    });
     if (!gl) return false;
 
     this.gl = gl;

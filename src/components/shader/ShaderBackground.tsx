@@ -134,6 +134,11 @@ export default function ShaderBackground() {
         height: '100%',
         pointerEvents: 'none',
         zIndex: -1,
+        // Force the canvas onto its own GPU compositing layer.
+        // On iOS, position:fixed elements can be composited incorrectly by the scroll thread,
+        // causing a black flash between rAF ticks. Promoting to a separate layer fixes this.
+        transform: 'translateZ(0)',
+        willChange: 'transform',
       }}
     />
   );
